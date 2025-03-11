@@ -38,8 +38,13 @@ doctest_optionflags = "ELLIPSIS NORMALIZE_WHITESPACE"
 testpaths = ["source", "tests"]
 
 [tool.setuptools]
+include-package-data = true
+packages = ["nauert"]
 package-dir = { "" = "source" }
 
-[tool.setuptools.packages.find]
-where = ["source"]
-include = ["nauert*"]
+[tool.setuptools.package-data]
+"*" = ["LICENSE", "README.md", "conftest.py"]
+"nauert" = ["**/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["docs/*"]
