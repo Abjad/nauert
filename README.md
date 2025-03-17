@@ -1,5 +1,5 @@
-Nauert
-======
+Nauert 3.22
+===========
 
 [![Python 3.12](
     https://img.shields.io/badge/python-3.12-blue.svg)](

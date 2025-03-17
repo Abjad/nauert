@@ -2,7 +2,7 @@
 Extension for quantizing rhythm, based on Paul Nauert's Q-Grid technique.
 """
 
-from ._version import __version__, __version_info__
+from ._version import __version__
 from .attackpointoptimizers import (
     AttackPointOptimizer,
     MeasurewiseAttackPointOptimizer,
