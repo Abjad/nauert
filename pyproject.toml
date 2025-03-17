@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nauert"
-version = "3.21"
+version = "3.22"
 description = "Nauert extends Abjad with tools for rhythm quantization."
 license = { text = "MIT" }
 readme = "README.md"
@@ -18,7 +18,7 @@ classifiers = [
     "Topic :: Artistic Software"
 ]
 dependencies = [
-    "abjad>=3.21"
+    "abjad>=3.22"
 ]
 
 [[project.authors]]

@@ -1,0 +1,118 @@
+rm -rf build/*
+sphinx-build -b html -d build/doctrees   source build/html
+Running Sphinx v8.1.3
+loading translations [en]... done
+making output directory... done
+installing lightbox files... 
+[autosummary] generating autosummary for: index.rst
+loading intersphinx inventory 'python' from https://docs.python.org/3/objects.inv ...
+loading intersphinx inventory 'sphinx' from http://www.sphinx-doc.org/en/master/objects.inv ...
+intersphinx inventory has moved: http://www.sphinx-doc.org/en/master/objects.inv -> https://www.sphinx-doc.org/en/master/objects.inv
+[uqbar-api] wrote source/api/index.rst
+[uqbar-api] wrote source/api/nauert/index.rst
+[uqbar-api] wrote source/api/nauert/attackpointoptimizers.rst
+[uqbar-api] wrote source/api/nauert/gracehandlers.rst
+[uqbar-api] wrote source/api/nauert/heuristics.rst
+[uqbar-api] wrote source/api/nauert/jobhandlers.rst
+[uqbar-api] wrote source/api/nauert/qeventproxy.rst
+[uqbar-api] wrote source/api/nauert/qevents.rst
+[uqbar-api] wrote source/api/nauert/qeventsequence.rst
+[uqbar-api] wrote source/api/nauert/qgrid.rst
+[uqbar-api] wrote source/api/nauert/qschemaitems.rst
+[uqbar-api] wrote source/api/nauert/qschemas.rst
+[uqbar-api] wrote source/api/nauert/qtargetitems.rst
+[uqbar-api] wrote source/api/nauert/qtargets.rst
+[uqbar-api] wrote source/api/nauert/quantizationjob.rst
+[uqbar-api] wrote source/api/nauert/quantizer.rst
+[uqbar-api] wrote source/api/nauert/searchtrees.rst
+[uqbar-book] initializing cache db
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 1 source files that are out of date
+updating environment: [new config] 18 added, 0 changed, 0 removed
+reading sources... [  6%] api/index
+reading sources... [ 11%] api/nauert/attackpointoptimizers
+reading sources... [ 17%] api/nauert/gracehandlers
+reading sources... [ 22%] api/nauert/heuristics
+reading sources... [ 28%] api/nauert/index
+reading sources... [ 33%] api/nauert/jobhandlers
+reading sources... [ 39%] api/nauert/qeventproxy
+reading sources... [ 44%] api/nauert/qevents
+reading sources... [ 50%] api/nauert/qeventsequence
+reading sources... [ 56%] api/nauert/qgrid
+reading sources... [ 61%] api/nauert/qschemaitems
+reading sources... [ 67%] api/nauert/qschemas
+reading sources... [ 72%] api/nauert/qtargetitems
+reading sources... [ 78%] api/nauert/qtargets
+reading sources... [ 83%] api/nauert/quantizationjob
+reading sources... [ 89%] api/nauert/quantizer
+reading sources... [ 94%] api/nauert/searchtrees
+reading sources... [100%] index
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+copying assets... 
+copying static files... 
+Writing evaluated template result to /Users/trevor/Repositories/Projects/nauert/docs/build/html/_static/basic.css
+Writing evaluated template result to /Users/trevor/Repositories/Projects/nauert/docs/build/html/_static/language_data.js
+Writing evaluated template result to /Users/trevor/Repositories/Projects/nauert/docs/build/html/_static/documentation_options.js
+Writing evaluated template result to /Users/trevor/Repositories/Projects/nauert/docs/build/html/_static/js/versions.js
+Writing evaluated template result to /Users/trevor/Repositories/Projects/nauert/docs/build/html/_static/toggleprompt.js
+copying static files: done
+copying extra files... 
+copying extra files: done
+copying assets: done
+writing output... [  6%] api/index
+writing output... [ 11%] api/nauert/attackpointoptimizers
+writing output... [ 17%] api/nauert/gracehandlers
+writing output... [ 22%] api/nauert/heuristics
+writing output... [ 28%] api/nauert/index
+writing output... [ 33%] api/nauert/jobhandlers
+writing output... [ 39%] api/nauert/qeventproxy
+writing output... [ 44%] api/nauert/qevents
+writing output... [ 50%] api/nauert/qeventsequence
+writing output... [ 56%] api/nauert/qgrid
+writing output... [ 61%] api/nauert/qschemaitems
+writing output... [ 67%] api/nauert/qschemas
+writing output... [ 72%] api/nauert/qtargetitems
+writing output... [ 78%] api/nauert/qtargets
+writing output... [ 83%] api/nauert/quantizationjob
+writing output... [ 89%] api/nauert/quantizer
+writing output... [ 94%] api/nauert/searchtrees
+writing output... [100%] index
+
+generating indices... genindex py-modindex done
+copying gallery thumbnails...
+highlighting module code... [  7%] nauert.attackpointoptimizers
+highlighting module code... [ 13%] nauert.gracehandlers
+highlighting module code... [ 20%] nauert.heuristics
+highlighting module code... [ 27%] nauert.jobhandlers
+highlighting module code... [ 33%] nauert.qeventproxy
+highlighting module code... [ 40%] nauert.qevents
+highlighting module code... [ 47%] nauert.qeventsequence
+highlighting module code... [ 53%] nauert.qgrid
+highlighting module code... [ 60%] nauert.qschemaitems
+highlighting module code... [ 67%] nauert.qschemas
+highlighting module code... [ 73%] nauert.qtargetitems
+highlighting module code... [ 80%] nauert.qtargets
+highlighting module code... [ 87%] nauert.quantizationjob
+highlighting module code... [ 93%] nauert.quantizer
+highlighting module code... [100%] nauert.searchtrees
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+
+[uqbar-book] Cache hits for abjad.rhythmtrees.RhythmTreeNode.duration: 1
+[uqbar-book] Cache hits for abjad.rhythmtrees.RhythmTreeNode.pair: 1
+[uqbar-book] Cache hits for abjad.rhythmtrees.RhythmTreeNode.pretty_rtm_format: 1
+[uqbar-book] Cache hits for abjad.rhythmtrees.RhythmTreeNode.start_offset: 1
+[uqbar-book] Cache hits for abjad.rhythmtrees.RhythmTreeNode.stop_offset: 1
+[uqbar-book] Cache hits for uqbar.containers.unique_tree.UniqueTreeNode.graph_order: 1
+build succeeded.
+
+The HTML pages are in build/html.
+
+Build finished. The HTML pages are in build/html.

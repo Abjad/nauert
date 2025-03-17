@@ -1,4 +1,4 @@
-.PHONY: black-check black-reformat build clean flake8 install isort-check \
+.PHONY: black-check black-reformat build clean docs flake8 install isort-check \
 	isort-reformat mypy pytest reformat release lint test
 
 black-check:
@@ -12,7 +12,10 @@ build:
 
 clean:
 	find . -name '*.pyc' -delete
-	rm -rf __pycache__ *.egg-info .cache .tox build dist htmlcov prof
+	rm -rf __pycache__ .cache .tox build dist htmlcov prof source/*.egg-info
+
+docs:
+	make -C docs/ html
 
 flake_ignore = --ignore=E203,E266,E501,W503
 flake_options = --isolated --max-line-length=88
@@ -63,9 +66,11 @@ pytest-coverage:
 reformat: black-reformat isort-reformat
 
 release:
+	make -C docs/ clean html
 	make clean
 	make build
 	twine upload dist/*.tar.gz
+	make gh-pages
 
 lint: black-check flake8 isort-check mypy
 
