@@ -25,7 +25,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
 
     def __init__(
         self,
-        preprolated_duration: abjad.typings.Duration = abjad.Duration(1),
+        preprolated_duration: abjad.Duration = abjad.Duration(1),
         q_event_proxies: typing.Sequence[_qeventproxy.QEventProxy] = (),
         is_divisible: bool = True,
     ) -> None:
@@ -461,14 +461,14 @@ class QGrid:
     def subdivide_leaf(
         self,
         leaf: QGridLeaf,
-        subdivisions: typing.Sequence[abjad.typings.Duration | int],
+        subdivisions: typing.Sequence[abjad.Duration | int],
     ) -> list[_qeventproxy.QEventProxy]:
         """
-        Replaces the ``QGridLeaf`` ``leaf`` contained in a ``QGrid`` by a
-        ``QGridContainer`` containing ``QGridLeaves`` with durations equal to
-        the ratio described in ``subdivisions``
+        Replaces the QGridLeaf ``leaf`` contained in a QGrid by a
+        QGridContainer containing QGridLeaves with durations equal to the ratio
+        described in ``subdivisions.``
 
-        Returns the ``QEventProxies`` attached to ``leaf``.
+        Returns list of QEventProxies attached to ``leaf``.
         """
         children = []
         for subdivision in subdivisions:
@@ -476,6 +476,8 @@ class QGrid:
                 subdivision = abjad.Duration(subdivision)
                 child = QGridLeaf(preprolated_duration=subdivision)
                 children.append(child)
+            else:
+                assert isinstance(subdivision, abjad.Duration), repr(subdivision)
         container = QGridContainer(
             leaf.pair,
             children=[

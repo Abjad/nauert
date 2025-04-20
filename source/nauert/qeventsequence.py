@@ -323,7 +323,7 @@ class QEventSequence:
     @classmethod
     def from_tempo_scaled_durations(
         class_,
-        durations: typing.Sequence[abjad.typings.Duration],
+        durations: typing.Sequence[abjad.Duration],
         tempo: abjad.MetronomeMark,
     ) -> "QEventSequence":
         r"""
