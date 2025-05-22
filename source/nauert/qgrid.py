@@ -50,7 +50,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         assert isinstance(pulse_duration, abjad.Duration), repr(pulse_duration)
         total_duration = pulse_duration * abjad.Duration(self.pair)
-        return abjad.makers.make_notes(0, [total_duration])
+        return abjad.makers.make_notes([0], [total_duration])
 
     def __graph__(self, **keywords: None) -> uqbar.graphs.Graph:
         """
