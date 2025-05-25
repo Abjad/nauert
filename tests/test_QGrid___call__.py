@@ -125,6 +125,7 @@ def test_QGrid___call___03():
     g = nauert.QEventProxy(nauert.SilentQEvent(abjad.Offset(1), ["G"]), abjad.Offset(1))
     q_grid.fit_q_events([a, b, c, d, e, f, g])
     result = q_grid(abjad.Duration(1, 3))
+    abjad.makers.tweak_tuplet_bracket_edge_height(result)
     assert isinstance(result, list) and len(result) == 1
     assert abjad.lilypond(result[0]) == abjad.string.normalize(
         r"""
