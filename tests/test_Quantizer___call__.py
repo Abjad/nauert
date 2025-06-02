@@ -530,6 +530,7 @@ def test_Quantize_12():
         search_tree=search_tree, time_signature=(7, 8), use_full_measure=True
     )
     result = nauert.quantize(q_event_sequence, q_schema=q_schema, attach_tempos=True)
+    abjad.makers.tweak_tuplet_number_text(result)
     staff = abjad.Staff([result])
     abjad.Score([staff], name="Score")
     string = abjad.lilypond(staff)
@@ -589,6 +590,7 @@ def test_Quantize_13():
         search_tree=search_tree, time_signature=(7, 8), use_full_measure=True
     )
     result = nauert.quantize(q_event_sequence, q_schema=q_schema, attach_tempos=True)
+    abjad.makers.tweak_tuplet_number_text(result)
     staff = abjad.Staff([result])
     abjad.Score([staff], name="Score")
     string = abjad.lilypond(staff)
@@ -769,6 +771,7 @@ def test_Quantize_16():
         attach_tempos=True,
         attack_point_optimizer=attack_point_optimizer,
     )
+    abjad.makers.tweak_tuplet_number_text(result)
     staff = abjad.Staff([result])
     abjad.Score([staff], name="Score")
     string = abjad.lilypond(staff)
