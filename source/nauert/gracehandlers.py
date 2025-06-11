@@ -290,7 +290,7 @@ class ConcatenatingGraceHandler(GraceHandler):
         assert isinstance(grace_duration, abjad.Duration), repr(grace_duration)
         assert isinstance(replace_rest_with_final_grace_note, bool)
         self._discard_grace_rest = discard_grace_rest
-        assert grace_duration.is_dyadic
+        assert grace_duration.is_dyadic()
         self._grace_duration = grace_duration
         self._replace_rest_with_final_grace_note = replace_rest_with_final_grace_note
 
