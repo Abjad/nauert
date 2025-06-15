@@ -231,7 +231,7 @@ class QGrid:
         voice = abjad.Voice(components)
         for tuplet in abjad.select.components(voice, abjad.Tuplet):
             assert isinstance(tuplet, abjad.Tuplet)
-            if tuplet.trivial():
+            if tuplet.is_trivial():
                 abjad.mutate.extract(tuplet)
         components_ = abjad.mutate.eject_contents(voice)
         for component in components_:
