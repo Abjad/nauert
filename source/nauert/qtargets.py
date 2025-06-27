@@ -138,7 +138,7 @@ class QTarget(abc.ABC):
     ):
         for leaf in abjad.iterate.leaves(voice):
             if leaf._has_indicator(dict):
-                annotation = leaf._get_indicator(dict)
+                annotation = abjad.get.indicator(leaf, dict)
                 q_events = annotation["q_events"]
                 pitches, attachments, grace_container = grace_handler(q_events)
                 new_leaf: abjad.Leaf
@@ -177,12 +177,12 @@ class QTarget(abc.ABC):
                     abjad.tie(leaves)
                     abjad.annotate(new_leaf, "tie_to_next", True)
             if leaf._has_indicator(abjad.MetronomeMark):
-                tempo = leaf._get_indicator(abjad.MetronomeMark)
+                tempo = abjad.get.indicator(leaf, abjad.MetronomeMark)
                 abjad.detach(abjad.MetronomeMark, leaf)
                 abjad.detach(abjad.MetronomeMark, new_leaf)
                 abjad.attach(tempo, new_leaf)
             if leaf._has_indicator(abjad.TimeSignature):
-                time_signature = leaf._get_indicator(abjad.TimeSignature)
+                time_signature = abjad.get.indicator(leaf, abjad.TimeSignature)
                 abjad.detach(abjad.TimeSignature, leaf)
                 abjad.detach(abjad.TimeSignature, new_leaf)
                 abjad.attach(time_signature, new_leaf)
