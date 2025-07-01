@@ -214,6 +214,7 @@ class MeasurewiseAttackPointOptimizer(AttackPointOptimizer):
         assert isinstance(argument, abjad.Container)
         if time_signature is None:
             leaf = abjad.get.leaf(argument, 0)
+            assert leaf is not None
             time_signature = abjad.get.indicator(leaf, abjad.TimeSignature)
         assert isinstance(time_signature, abjad.TimeSignature), repr(time_signature)
         all_annotations = self._get_attachment_annotations_of_logical_ties(argument[:])
