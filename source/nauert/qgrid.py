@@ -249,6 +249,7 @@ class QGrid:
                 )
                 annotation = {"q_events": tuple(q_events)}
                 leaf = abjad.get.leaf(logical_tie, 0)
+                assert leaf is not None
                 abjad.attach(annotation, leaf)
         return result
 

@@ -351,10 +351,12 @@ class MeasurewiseQTarget(QTarget):
             measure.extend(components)
         voice.append(measure)
         leaf = abjad.get.leaf(measure, 0)
+        assert leaf is not None
         abjad.attach(time_signature, leaf)
         if attach_tempos:
             tempo = copy.deepcopy(q_target_measure.tempo)
             leaf = abjad.get.leaf(measure, 0)
+            assert leaf is not None
             abjad.attach(tempo, leaf)
         # generate the rest pairwise, comparing tempi
         pairs = abjad.sequence.nwise(self.items)
@@ -369,12 +371,14 @@ class MeasurewiseQTarget(QTarget):
             ):
                 time_signature = q_target_measure_two.time_signature
                 leaf = abjad.get.leaf(measure, 0)
+                assert leaf is not None
                 abjad.attach(time_signature, leaf)
             if (
                 q_target_measure_two.tempo != q_target_measure_one.tempo
             ) and attach_tempos:
                 tempo = copy.deepcopy(q_target_measure_two.tempo)
                 leaf = abjad.get.leaf(measure, 0)
+                assert leaf is not None
                 abjad.attach(tempo, leaf)
         # apply logical ties, pitches, grace containers
         self._notate_leaves(grace_handler=grace_handler, voice=voice)
