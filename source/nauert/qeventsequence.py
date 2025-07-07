@@ -393,7 +393,7 @@ class QEventSequence:
         match tempo:
             case None:
                 prototype = abjad.MetronomeMark
-                assert abjad.get.effective(leaves[0], prototype) is not None
+                assert abjad.get.effective_indicator(leaves[0], prototype) is not None
             case abjad.MetronomeMark():
                 tempo = copy.deepcopy(tempo)
             case tuple():
@@ -423,7 +423,7 @@ class QEventSequence:
                 )
             else:
                 duration = sum(
-                    abjad.get.effective(
+                    abjad.get.effective_indicator(
                         x, abjad.MetronomeMark
                     ).duration_to_milliseconds(x._get_duration())
                     for x in group
