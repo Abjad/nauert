@@ -429,7 +429,7 @@ class MeasurewiseQSchema(QSchema):
         ...
         search_tree: UnweightedSearchTree(definition={7: None})
         tempo: MetronomeMark(...)
-        time_signature: TimeSignature(pair=(3, 4), hide=False, partial=None)
+        time_signature: TimeSignature(pair=(3, 4), partial=None)
         use_full_measure: True
 
         >>> index = 1000
@@ -438,7 +438,7 @@ class MeasurewiseQSchema(QSchema):
         ...
         search_tree: UnweightedSearchTree(definition={7: None})
         tempo: MetronomeMark(...)
-        time_signature: TimeSignature(pair=(3, 4), hide=False, partial=None)
+        time_signature: TimeSignature(pair=(3, 4), partial=None)
         use_full_measure: True
 
     ..  container:: example
@@ -488,28 +488,28 @@ class MeasurewiseQSchema(QSchema):
         >>> q_schema = nauert.MeasurewiseQSchema(settings)
 
         >>> q_schema[0]["time_signature"]
-        TimeSignature(pair=(4, 4), hide=False, partial=None)
+        TimeSignature(pair=(4, 4), partial=None)
 
         >>> q_schema[1]["time_signature"]
-        TimeSignature(pair=(4, 4), hide=False, partial=None)
+        TimeSignature(pair=(4, 4), partial=None)
 
         >>> q_schema[2]["time_signature"]
-        TimeSignature(pair=(7, 32), hide=False, partial=None)
+        TimeSignature(pair=(7, 32), partial=None)
 
         >>> q_schema[3]["time_signature"]
-        TimeSignature(pair=(7, 32), hide=False, partial=None)
+        TimeSignature(pair=(7, 32), partial=None)
 
         >>> q_schema[4]["time_signature"]
-        TimeSignature(pair=(3, 4), hide=False, partial=None)
+        TimeSignature(pair=(3, 4), partial=None)
 
         >>> q_schema[5]["time_signature"]
-        TimeSignature(pair=(3, 4), hide=False, partial=None)
+        TimeSignature(pair=(3, 4), partial=None)
 
         >>> q_schema[6]["time_signature"]
-        TimeSignature(pair=(5, 8), hide=False, partial=None)
+        TimeSignature(pair=(5, 8), partial=None)
 
         >>> q_schema[1000]["time_signature"]
-        TimeSignature(pair=(5, 8), hide=False, partial=None)
+        TimeSignature(pair=(5, 8), partial=None)
 
     ..  container:: example
 
@@ -604,7 +604,7 @@ class MeasurewiseQSchema(QSchema):
             ...     time_signature=abjad.TimeSignature((3, 4))
             ... )
             >>> q_schema.time_signature
-            TimeSignature(pair=(3, 4), hide=False, partial=None)
+            TimeSignature(pair=(3, 4), partial=None)
 
         ..  container:: example
 
@@ -623,7 +623,7 @@ class MeasurewiseQSchema(QSchema):
 
             >>> q_schema = nauert.MeasurewiseQSchema(settings)
             >>> q_schema.time_signature
-            TimeSignature(pair=(4, 4), hide=False, partial=None)
+            TimeSignature(pair=(4, 4), partial=None)
 
         """
         return self._time_signature
