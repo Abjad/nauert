@@ -140,7 +140,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
 
         >>> time_signature = abjad.TimeSignature((6, 8))
         >>> nauert.MeasurewiseQSchemaItem(time_signature=time_signature).time_signature
-        TimeSignature(pair=(6, 8), hide=False, partial=None)
+        TimeSignature(pair=(6, 8), partial=None)
 
     ..  container:: example
 

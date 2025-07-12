@@ -532,7 +532,7 @@ class QTargetMeasure(QTargetItem):
             ... )
 
             >>> q_target_measure.time_signature
-            TimeSignature(pair=(4, 4), hide=False, partial=None)
+            TimeSignature(pair=(4, 4), partial=None)
 
         """
         return self._time_signature
