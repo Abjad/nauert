@@ -30,7 +30,7 @@ class QSchemaItem(abc.ABC):
         self._search_tree = search_tree
         if tempo is not None:
             assert isinstance(tempo, abjad.MetronomeMark), repr(tempo)
-            assert not tempo.is_imprecise
+            assert not tempo.get_is_imprecise()
         self._tempo = tempo
 
     ### PUBLIC PROPERTIES ###
@@ -198,7 +198,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
         """
         if self.time_signature is not None:
             if self.use_full_measure:
-                return self.time_signature.duration
+                return self.time_signature.get_duration()
             else:
                 return abjad.Duration(1, self.time_signature.denominator)
         return None

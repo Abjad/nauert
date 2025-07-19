@@ -35,7 +35,7 @@ class QuantizationJob:
 
         >>> job()
         >>> for q_grid in job.q_grids:
-        ...     print(q_grid.rtm_format)
+        ...     print(q_grid.rtm_format())
         1
         (1 (1 1 1 1 1))
         (1 (1 1 1))
@@ -89,9 +89,9 @@ class QuantizationJob:
         while new_q_grids:
             q_grid = new_q_grids.pop()
             search_results = self.search_tree(q_grid)
-            # print q_grid.rtm_format
+            # print q_grid.rtm_format()
             # for x in search_results:
-            #    print '\t', x.rtm_format
+            #    print '\t', x.rtm_format()
             new_q_grids.extend(search_results)
             old_q_grids.append(q_grid)
         # for q_grid in old_q_grids:
@@ -189,7 +189,7 @@ class QuantizationJob:
         >>> job()
 
         >>> for q_grid in job.q_grids:
-        ...     print(q_grid.rtm_format)
+        ...     print(q_grid.rtm_format())
         1
         (1 (1 1 1 1 1))
         (1 (1 1 1))

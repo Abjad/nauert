@@ -64,5 +64,5 @@ def test_UnweightedSearchTree___call___01():
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g, h, i, j, k])
     q_grids = search_tree(q_grid)
-    assert q_grids[0].root_node.rtm_format == "(1 (1 1))"
-    assert q_grids[1].root_node.rtm_format == "(1 (1 1 1 1 1))"
+    assert q_grids[0].root_node.rtm_format() == "(1 (1 1))"
+    assert q_grids[1].root_node.rtm_format() == "(1 (1 1 1 1 1))"

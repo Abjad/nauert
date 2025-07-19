@@ -68,7 +68,7 @@ def test_QuantizationJob___call___01():
     job()
     assert len(job.q_grids) == 10
 
-    rtm_formats = [q_grid.root_node.rtm_format for q_grid in job.q_grids]
+    rtm_formats = [q_grid.root_node.rtm_format() for q_grid in job.q_grids]
     rtm_formats.sort(reverse=True)
     assert rtm_formats == [
         "1",

@@ -48,9 +48,9 @@ def test_ParallelJobHandler___call___02():
     b_jobs = nauert.ParallelJobHandler()([job_b])
     assert len(a_jobs) == len(b_jobs)
 
-    a_rtms = sorted([q_grid.root_node.rtm_format for q_grid in a_jobs[0].q_grids])
-    b_rtms = sorted([q_grid.root_node.rtm_format for q_grid in b_jobs[0].q_grids])
+    a_rtms = sorted([q_grid.root_node.rtm_format() for q_grid in a_jobs[0].q_grids])
+    b_rtms = sorted([q_grid.root_node.rtm_format() for q_grid in b_jobs[0].q_grids])
     assert a_rtms == b_rtms
-    assert sorted(a_jobs[0].q_grids, key=lambda x: x.root_node.rtm_format) == sorted(
-        b_jobs[0].q_grids, key=lambda x: x.root_node.rtm_format
+    assert sorted(a_jobs[0].q_grids, key=lambda x: x.root_node.rtm_format()) == sorted(
+        b_jobs[0].q_grids, key=lambda x: x.root_node.rtm_format()
     )

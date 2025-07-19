@@ -76,7 +76,7 @@ class QTargetBeat(QTargetItem):
             search_tree = _searchtrees.UnweightedSearchTree()
         assert isinstance(search_tree, _searchtrees.SearchTree)
         assert isinstance(tempo, abjad.MetronomeMark), repr(tempo)
-        assert not tempo.is_imprecise
+        assert not tempo.get_is_imprecise()
         q_events: list[_qevents.QEvent] = []
         q_grids: tuple[_qgrid.QGrid, ...] = ()
         self._beatspan = beatspan
@@ -342,12 +342,12 @@ class QTargetMeasure(QTargetItem):
         assert isinstance(search_tree, _searchtrees.SearchTree)
         assert isinstance(time_signature, abjad.TimeSignature), repr(time_signature)
         assert isinstance(tempo, abjad.MetronomeMark), repr(tempo)
-        assert not tempo.is_imprecise
+        assert not tempo.get_is_imprecise()
         _time_signature = abjad.TimeSignature(time_signature.pair)
         use_full_measure = bool(use_full_measure)
         beats = []
         if use_full_measure:
-            beatspan = _time_signature.duration
+            beatspan = _time_signature.get_duration()
             beat = QTargetBeat(
                 beatspan=beatspan,
                 offset_in_ms=offset_in_ms,
@@ -439,7 +439,7 @@ class QTargetMeasure(QTargetItem):
             Duration(4000, 1)
 
         """
-        return self.tempo.duration_to_milliseconds(self.time_signature.duration)
+        return self.tempo.duration_to_milliseconds(self.time_signature.get_duration())
 
     @property
     def offset_in_ms(self) -> abjad.Offset:

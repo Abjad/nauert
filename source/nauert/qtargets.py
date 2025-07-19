@@ -87,7 +87,7 @@ class QTarget(abc.ABC):
         beats = self.beats
         offsets = sorted([beat.offset_in_ms for beat in beats])
         for q_event in q_event_sequence:
-            index = bisect.bisect(offsets, q_event.offset) - 1
+            index = bisect.bisect(offsets, q_event.offset()) - 1
             beat = beats[index]
             beat.q_events.append(q_event)
         # generate QuantizationJobs and process with the JobHandler

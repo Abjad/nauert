@@ -64,7 +64,7 @@ def test_WeightedSearchTree___call___01():
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g, h, i, j, k])
     q_grids = search_tree(q_grid)
-    assert [q_grid.root_node.rtm_format for q_grid in q_grids] == [
+    assert [q_grid.root_node.rtm_format() for q_grid in q_grids] == [
         "(1 (1 1))",
         "(1 (2 1))",
         "(1 (1 2))",
