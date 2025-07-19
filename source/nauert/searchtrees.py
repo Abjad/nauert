@@ -189,7 +189,7 @@ class UnweightedSearchTree(SearchTree):
         >>> q_grid.fit_q_events([proxy_a, proxy_b])
         >>> q_grids = search_tree(q_grid)
         >>> for grid in q_grids:
-        ...     print(grid.rtm_format)
+        ...     print(grid.rtm_format())
         (1 (1 1))
         (1 (1 1 1))
         (1 (1 1 1 1 1))
@@ -209,7 +209,7 @@ class UnweightedSearchTree(SearchTree):
 
         >>> q_grids = search_tree(q_grid)
         >>> for grid in q_grids:
-        ...     print(grid.rtm_format)
+        ...     print(grid.rtm_format())
         (1 (1 1))
         (1 (1 1 1))
 

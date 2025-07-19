@@ -8,7 +8,7 @@ import nauert
 
 def test_PitchedQEvent___init___01():
     q_event = nauert.PitchedQEvent(abjad.Offset(130), [0, 1, 4])
-    assert q_event.offset == abjad.Offset(130)
+    assert q_event.offset() == abjad.Offset(130)
     assert q_event.pitches == (
         abjad.NamedPitch(0),
         abjad.NamedPitch(1),
@@ -23,7 +23,7 @@ def test_PitchedQEvent___init___02():
         [abjad.NamedPitch("fss")],
         attachments=["foo", "bar", "baz"],
     )
-    assert q_event.offset == abjad.Offset(133, 5)
+    assert q_event.offset() == abjad.Offset(133, 5)
     assert q_event.pitches == (abjad.NamedPitch("fss"),)
     assert q_event.attachments == ("foo", "bar", "baz")
 
@@ -54,14 +54,14 @@ def test_PitchedQEvent___eq___03():
 
 def test_SilentQEvent___init___01():
     q_event = nauert.SilentQEvent(abjad.Offset(130))
-    assert q_event.offset == abjad.Offset(130)
+    assert q_event.offset() == abjad.Offset(130)
     assert q_event.attachments == ()
 
 
 def test_SilentQEvent___init___02():
     attachments = ["foo", "bar", "baz"]
     q_event = nauert.SilentQEvent(abjad.Offset(155, 7), attachments=attachments)
-    assert q_event.offset == abjad.Offset(155, 7)
+    assert q_event.offset() == abjad.Offset(155, 7)
     assert q_event.attachments == ("foo", "bar", "baz")
 
 
@@ -81,7 +81,7 @@ def test_SilentQEvent___eq___02():
 
 def test_TerminalQEvent___init___01():
     q_event = nauert.TerminalQEvent(abjad.Offset(154))
-    assert q_event.offset == abjad.Offset(154)
+    assert q_event.offset() == abjad.Offset(154)
 
 
 def test_TerminalQEvent___eq___01():
@@ -109,7 +109,7 @@ def test_QEvent_from_offset_pitches_attachments():
         abjad.Offset(100), 1, ("foo",)
     )
     assert isinstance(q_event, nauert.PitchedQEvent)
-    assert q_event.offset == 100
+    assert q_event.offset() == 100
     assert q_event.pitches == (abjad.NamedPitch(1),)
     assert q_event.attachments == ("foo",)
 

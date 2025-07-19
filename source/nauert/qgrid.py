@@ -50,7 +50,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         assert isinstance(pulse_duration, abjad.Duration), repr(pulse_duration)
         pitches = abjad.makers.make_pitches([0])
-        total_duration = pulse_duration * abjad.Duration(self.pair)
+        total_duration = pulse_duration * abjad.Duration(self.pair())
         return abjad.makers.make_notes(pitches, [total_duration])
 
     def __graph__(self, **keywords: None) -> uqbar.graphs.Graph:
@@ -67,7 +67,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         Gets repr.
         """
-        string = f"{type(self).__name__}({self.pair!r},"
+        string = f"{type(self).__name__}({self.pair()!r},"
         string += f" q_event_proxies={self.q_event_proxies!r},"
         string += f" is_divisible={self.is_divisible!r})"
         return string
@@ -76,7 +76,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
 
     @property
     def _pretty_rtm_format_pieces(self) -> list[str]:
-        numerator, denominator = self.pair
+        numerator, denominator = self.pair()
         assert denominator == 1, repr(denominator)
         return [str(numerator)]
 
@@ -99,7 +99,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         Gets preceding q-event proxies of q-grid leaf.
         """
-        return [x for x in self._q_event_proxies if x.offset < self.start_offset]
+        return [x for x in self._q_event_proxies if x.offset() < self.start_offset()]
 
     @property
     def q_event_proxies(self) -> list[_qeventproxy.QEventProxy]:
@@ -108,12 +108,11 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         return self._q_event_proxies
 
-    @property
     def rtm_format(self) -> str:
         """
         Gets RTM format of q-grid leaf.
         """
-        numerator, denominator = self.pair
+        numerator, denominator = self.pair()
         assert denominator == 1, repr(denominator)
         return str(numerator)
 
@@ -122,7 +121,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         Gets succeeding q-event proxies of q-grid leaf.
         """
-        return [x for x in self._q_event_proxies if self.start_offset <= x.offset]
+        return [x for x in self._q_event_proxies if self.start_offset() <= x.offset()]
 
 
 class QGridContainer(abjad.rhythmtrees.RhythmTreeContainer):
@@ -305,7 +304,7 @@ class QGrid:
             >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.Offset(0.25))
             >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.Offset(0.75))
             >>> q_grid.fit_q_events([proxy_a, proxy_b])
-            >>> print(q_grid.rtm_format)
+            >>> print(q_grid.rtm_format())
             1
 
             >>> pairs = zip(q_grid.leaves, q_grid.offsets, strict=True)
@@ -328,7 +327,7 @@ class QGrid:
             >>> q_grid.fit_q_events(q_events)
             >>> q_events = q_grid.subdivide_leaves([(0, (1, 1))])
             >>> q_grid.fit_q_events(q_events)
-            >>> print(q_grid.rtm_format)
+            >>> print(q_grid.rtm_format())
             (1 ((1 (1 1)) 1))
 
             >>> pairs = zip(q_grid.leaves, q_grid.offsets, strict=True)
@@ -352,7 +351,7 @@ class QGrid:
         absolute_distance = abjad.Duration(0)
         for leaf, offset in zip(self.leaves, self.offsets):
             for q_event_proxy in leaf.q_event_proxies:
-                absolute_distance += abs(q_event_proxy.offset - offset)
+                absolute_distance += abs(q_event_proxy.offset() - offset)
                 count += 1
         if count:
             return absolute_distance / count
@@ -381,14 +380,13 @@ class QGrid:
         """
         Gets the offsets between 0 and 1 of all of the leaf nodes in the QGrid.
         """
-        return tuple([x.start_offset for x in self.leaves[:-1]] + [abjad.Offset(1)])
+        return tuple([x.start_offset() for x in self.leaves[:-1]] + [abjad.Offset(1)])
 
-    @property
     def pretty_rtm_format(self) -> str:
         """
         Gets the pretty RTM-format of the root node of the ``QGrid``.
         """
-        return self._root_node.pretty_rtm_format
+        return self._root_node.pretty_rtm_format()
 
     @property
     def root_node(self) -> QGridLeaf | QGridContainer:
@@ -397,12 +395,11 @@ class QGrid:
         """
         return self._root_node
 
-    @property
     def rtm_format(self) -> str:
         """
         Gets the RTM format of the root node of the ``QGrid``.
         """
-        return self._root_node.rtm_format
+        return self._root_node.rtm_format()
 
     ### PUBLIC METHODS ###
 
@@ -416,13 +413,13 @@ class QGrid:
         assert all(isinstance(x, _qeventproxy.QEventProxy) for x in q_event_proxies)
         leaves, offsets = self.leaves, self.offsets
         for q_event_proxy in q_event_proxies:
-            idx = bisect.bisect_left(offsets, q_event_proxy.offset)
-            if q_event_proxy.offset == offsets[idx]:
+            idx = bisect.bisect_left(offsets, q_event_proxy.offset())
+            if q_event_proxy.offset() == offsets[idx]:
                 leaves[idx].q_event_proxies.append(q_event_proxy)
             else:
                 left, right = offsets[idx - 1], offsets[idx]
-                left_diff = abs(left - q_event_proxy.offset)
-                right_diff = abs(right - q_event_proxy.offset)
+                left_diff = abs(left - q_event_proxy.offset())
+                right_diff = abs(right - q_event_proxy.offset())
                 if right_diff < left_diff:
                     leaves[idx].q_event_proxies.append(q_event_proxy)
                 else:
@@ -443,7 +440,7 @@ class QGrid:
                     [_leaf.q_event_proxies == [] for _leaf in leaves[1:]]
                 ):
                     new_leaf = QGridLeaf(
-                        preprolated_duration=abjad.Duration(parent.pair),
+                        preprolated_duration=abjad.Duration(parent.pair()),
                         q_event_proxies=leaves[0].q_event_proxies,
                     )
                     index = parent.parent.index(parent)
@@ -481,7 +478,7 @@ class QGrid:
             else:
                 assert isinstance(subdivision, abjad.Duration), repr(subdivision)
         container = QGridContainer(
-            leaf.pair,
+            leaf.pair(),
             children=[
                 QGridLeaf(preprolated_duration=abjad.Duration(subdivision))
                 for subdivision in subdivisions
@@ -518,11 +515,11 @@ class QGrid:
             if next_leaf is self.next_downbeat:
                 next_leaf_offset = abjad.Offset(1)
             else:
-                next_leaf_offset = next_leaf.start_offset
+                next_leaf_offset = next_leaf.start_offset()
 
             q_event_proxies.extend(self.subdivide_leaf(leaf, subdivisions[i]))
             for q_event_proxy in tuple(next_leaf.q_event_proxies):
-                if q_event_proxy.offset < next_leaf_offset:
+                if q_event_proxy.offset() < next_leaf_offset:
                     idx = next_leaf.q_event_proxies.index(q_event_proxy)
                     q_event_proxies.append(next_leaf.q_event_proxies.pop(idx))
         return q_event_proxies

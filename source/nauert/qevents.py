@@ -53,7 +53,7 @@ class QEvent(abc.ABC):
         Gets repr.
         """
         class_name = type(self).__name__
-        string = f"{class_name}(offset={self.offset!r}, index={self.index!r}"
+        string = f"{class_name}(offset={self.offset()!r}, index={self.index!r}"
         string += f", attachments={self.attachments!r})"
         return string
 
@@ -73,7 +73,6 @@ class QEvent(abc.ABC):
         """
         return self._index
 
-    @property
     def offset(self) -> abjad.Offset:
         """
         The offset in milliseconds of the event.
@@ -139,7 +138,7 @@ class PitchedQEvent(QEvent):
         """
         if (
             type(self) is type(argument)
-            and self.offset == argument.offset
+            and self.offset() == argument.offset()
             and self.pitches == argument.pitches
             and self.attachments == argument.attachments
             and self.index == argument.index
@@ -159,7 +158,7 @@ class PitchedQEvent(QEvent):
         """
         Gets repr.
         """
-        string = f"{type(self).__name__}(offset={self.offset!r},"
+        string = f"{type(self).__name__}(offset={self.offset()!r},"
         string += f" pitches={self.pitches!r}, index={self.index!r},"
         string += f" attachments={self.attachments!r})"
         return string
@@ -276,7 +275,7 @@ class TerminalQEvent(QEvent):
         Is true when `argument` is a terminal q-event with offset equal to that
         of this terminal q-event. Otherwise false.
         """
-        if type(self) is type(argument) and self.offset == argument.offset:
+        if type(self) is type(argument) and self.offset() == argument.offset():
             return True
         return False
 

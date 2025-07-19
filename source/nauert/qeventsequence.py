@@ -54,10 +54,10 @@ class QEventSequence:
                 isinstance(q_event, q_event_classes) for q_event in sequence[:-1]
             )
             assert isinstance(sequence[-1], _qevents.TerminalQEvent)
-            offsets = [x.offset for x in sequence]
+            offsets = [x.offset() for x in sequence]
             offset_sequence = list(offsets)
             assert abjad.sequence.is_increasing(offset_sequence, strict=False)
-            assert 0 <= sequence[0].offset
+            assert 0 <= sequence[0].offset()
             self._sequence = tuple(sequence)
 
     ### SPECIAL METHODS ###
@@ -129,7 +129,7 @@ class QEventSequence:
         Duration(4000, 1)
 
         """
-        return abjad.Duration(self[-1].offset)
+        return abjad.Duration(self[-1].offset())
 
     @property
     def sequence(self) -> tuple:
