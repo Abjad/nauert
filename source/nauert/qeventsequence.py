@@ -435,10 +435,10 @@ class QEventSequence:
                 pitch = None
             elif isinstance(group[0], abjad.Note):
                 assert group[0].written_pitch is not None
-                pitch = group[0].written_pitch.number
+                pitch = group[0].written_pitch.get_number()
             # chord
             else:
-                pitch = [x.written_pitch.number for x in group[0].note_heads]
+                pitch = [x.written_pitch.get_number() for x in group[0].note_heads]
             pitches.append(pitch)
         # convert durations and pitches to QEvents and return
         return class_.from_millisecond_pitch_pairs(tuple(zip(durations, pitches)))
