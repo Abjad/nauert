@@ -146,10 +146,10 @@ class QTarget(abc.ABC):
                     new_leaf = abjad.Rest(leaf)
                 elif 1 < len(pitches):
                     new_leaf = abjad.Chord(leaf)
-                    new_leaf.written_pitches = pitches
+                    new_leaf.set_written_pitches(pitches)
                 else:
                     new_leaf = abjad.Note(leaf)
-                    new_leaf.written_pitch = pitches[0]
+                    new_leaf.set_written_pitch(pitches[0])
                 if attachments is not None:
                     abjad.annotate(new_leaf, "q_event_attachments", attachments)
                 if grace_container:
@@ -162,14 +162,14 @@ class QTarget(abc.ABC):
             else:
                 previous_leaf = abjad._iterlib._get_leaf(leaf, -1)
                 if isinstance(previous_leaf, abjad.Rest):
-                    new_leaf = type(previous_leaf)(leaf.written_duration)
+                    new_leaf = type(previous_leaf)(leaf.get_written_duration())
                 elif isinstance(previous_leaf, abjad.Note):
                     new_leaf = type(previous_leaf)(
-                        previous_leaf.written_pitch, leaf.written_duration
+                        previous_leaf.get_written_pitch(), leaf.get_written_duration()
                     )
                 else:
                     new_leaf = type(previous_leaf)(
-                        previous_leaf.written_pitches, leaf.written_duration
+                        previous_leaf.get_written_pitches(), leaf.get_written_duration()
                     )
                 abjad.mutate.replace(leaf, new_leaf)
                 if abjad.get.annotation(previous_leaf, "tie_to_next") is True:
