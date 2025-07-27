@@ -440,7 +440,8 @@ class QEventSequence:
             # chord
             else:
                 pitch = [
-                    x.get_written_pitch().get_number() for x in group[0].note_heads
+                    x.get_written_pitch().get_number()
+                    for x in group[0].get_note_heads()
                 ]
             pitches.append(pitch)
         # convert durations and pitches to QEvents and return
