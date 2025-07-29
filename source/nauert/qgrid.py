@@ -36,7 +36,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         assert all(isinstance(x, _qeventproxy.QEventProxy) for x in q_event_proxies)
         assert isinstance(is_divisible, bool), repr(is_divisible)
         uqbar.containers.UniqueTreeNode.__init__(self)
-        abjad.rhythmtrees.RhythmTreeNode.__init__(self, preprolated_duration.get_pair())
+        abjad.rhythmtrees.RhythmTreeNode.__init__(self, preprolated_duration.pair())
         self._q_event_proxies = list(q_event_proxies)
         self._is_divisible = is_divisible
 
