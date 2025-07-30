@@ -436,12 +436,11 @@ class QEventSequence:
             elif isinstance(group[0], abjad.Note):
                 first_written_pitch = group[0].get_written_pitch()
                 assert first_written_pitch is not None
-                pitch = first_written_pitch.get_number()
+                pitch = first_written_pitch.number()
             # chord
             else:
                 pitch = [
-                    x.get_written_pitch().get_number()
-                    for x in group[0].get_note_heads()
+                    x.get_written_pitch().number() for x in group[0].get_note_heads()
                 ]
             pitches.append(pitch)
         # convert durations and pitches to QEvents and return
