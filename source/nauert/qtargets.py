@@ -162,14 +162,14 @@ class QTarget(abc.ABC):
             else:
                 previous_leaf = abjad._iterlib._get_leaf(leaf, -1)
                 if isinstance(previous_leaf, abjad.Rest):
-                    new_leaf = type(previous_leaf)(leaf.get_written_duration())
+                    new_leaf = type(previous_leaf)(leaf.written_duration())
                 elif isinstance(previous_leaf, abjad.Note):
                     new_leaf = type(previous_leaf)(
-                        previous_leaf.get_written_pitch(), leaf.get_written_duration()
+                        previous_leaf.written_pitch(), leaf.written_duration()
                     )
                 else:
                     new_leaf = type(previous_leaf)(
-                        previous_leaf.get_written_pitches(), leaf.get_written_duration()
+                        previous_leaf.written_pitches(), leaf.written_duration()
                     )
                 abjad.mutate.replace(leaf, new_leaf)
                 if abjad.get.annotation(previous_leaf, "tie_to_next") is True:
