@@ -50,7 +50,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         assert isinstance(pulse_duration, abjad.Duration), repr(pulse_duration)
         pitches = abjad.makers.make_pitches([0])
-        total_duration = pulse_duration * abjad.Duration(self.pair())
+        total_duration = pulse_duration * abjad.Duration(*self.pair())
         return abjad.makers.make_notes(pitches, [total_duration])
 
     def __graph__(self, **keywords: None) -> uqbar.graphs.Graph:
@@ -440,7 +440,7 @@ class QGrid:
                     [_leaf.q_event_proxies == [] for _leaf in leaves[1:]]
                 ):
                     new_leaf = QGridLeaf(
-                        preprolated_duration=abjad.Duration(parent.pair()),
+                        preprolated_duration=abjad.Duration(*parent.pair()),
                         q_event_proxies=leaves[0].q_event_proxies,
                     )
                     index = parent.parent.index(parent)

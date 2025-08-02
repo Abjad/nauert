@@ -312,7 +312,8 @@ class BeatwiseQSchema(QSchema):
     ### INITIALIZER ###
 
     def __init__(self, *arguments, **keywords):
-        self._beatspan = abjad.Duration(keywords.get("beatspan", (1, 4)))
+        duration = abjad.Duration(1, 4)
+        self._beatspan = abjad.Duration(keywords.get("beatspan", duration))
         search_tree = keywords.get("search_tree", _searchtrees.UnweightedSearchTree())
         assert isinstance(search_tree, _searchtrees.SearchTree)
         self._search_tree = search_tree

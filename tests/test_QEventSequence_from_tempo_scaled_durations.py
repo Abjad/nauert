@@ -7,7 +7,8 @@ def test_QEventSequence_from_tempo_scaled_durations_01():
     """
     Test basic functionality.
     """
-    durations = [abjad.Duration(x) for x in [(1, 4), (1, 3), (1, 7), (2, 5), (3, 4)]]
+    pairs = [(1, 4), (1, 3), (1, 7), (2, 5), (3, 4)]
+    durations = abjad.duration.durations(pairs)
     tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 55)
     q_events = nauert.QEventSequence.from_tempo_scaled_durations(durations, tempo)
     assert q_events == nauert.QEventSequence(
@@ -26,10 +27,8 @@ def test_QEventSequence_from_tempo_scaled_durations_02():
     """
     Silences are fused.
     """
-    durations = [
-        abjad.Duration(x)
-        for x in [(1, 4), (-1, 4), (1, 4), (1, 4), (-1, 4), (-1, 4), (1, 4)]
-    ]
+    pairs = [(1, 4), (-1, 4), (1, 4), (1, 4), (-1, 4), (-1, 4), (1, 4)]
+    durations = abjad.duration.durations(pairs)
     tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 77)
     q_events = nauert.QEventSequence.from_tempo_scaled_durations(durations, tempo)
     assert q_events == nauert.QEventSequence(
