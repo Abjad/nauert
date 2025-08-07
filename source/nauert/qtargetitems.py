@@ -185,7 +185,7 @@ class QTargetBeat(QTargetItem):
         ... )
 
         >>> q_target_beat.offset_in_ms
-        Offset((1500, 1))
+        Offset(1500, 1)
 
         """
         return self._offset_in_ms
@@ -409,10 +409,10 @@ class QTargetMeasure(QTargetItem):
             >>> for q_target_beat in q_target_measure.beats:
             ...     q_target_beat.offset_in_ms
             ...
-            Offset((1000, 1))
-            Offset((2000, 1))
-            Offset((3000, 1))
-            Offset((4000, 1))
+            Offset(1000, 1)
+            Offset(2000, 1)
+            Offset(3000, 1)
+            Offset(4000, 1)
 
         """
         return self._beats
@@ -460,7 +460,7 @@ class QTargetMeasure(QTargetItem):
             ... )
 
             >>> q_target_measure.offset_in_ms
-            Offset((1000, 1))
+            Offset(1000, 1)
 
         """
         return self._offset_in_ms
