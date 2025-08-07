@@ -491,8 +491,8 @@ class DiscardingGraceHandler(GraceHandler):
 
         >>> for pqe in grace_handler.discarded_q_events[0]:
         ...     pqe
-        PitchedQEvent(offset=Offset((1000, 1)), pitches=(NamedPitch("cs'"),), ...)
-        PitchedQEvent(offset=Offset((1001, 1)), pitches=(NamedPitch("d'"),), ...)
+        PitchedQEvent(offset=Offset(1000, 1), pitches=(NamedPitch("cs'"),), ...)
+        PitchedQEvent(offset=Offset(1001, 1), pitches=(NamedPitch("d'"),), ...)
 
     """
 
