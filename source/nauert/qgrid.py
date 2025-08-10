@@ -50,7 +50,7 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         assert isinstance(pulse_duration, abjad.Duration), repr(pulse_duration)
         pitches = abjad.makers.make_pitches([0])
-        total_duration = pulse_duration * abjad.Duration(*self.pair())
+        total_duration = abjad.Duration(abjad.Fraction(*self.pair()) * pulse_duration)
         return abjad.makers.make_notes(pitches, [total_duration])
 
     def __graph__(self, **keywords: None) -> uqbar.graphs.Graph:
@@ -289,7 +289,7 @@ class QGrid:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distance(self) -> typing.Optional[abjad.Duration]:
+    def distance(self) -> abjad.Duration | None:
         r"""
         The computed total distance (divided by the number of ``QEventProxy``
         objects) of the offset of each ``QEventProxy`` contained by the
@@ -354,7 +354,8 @@ class QGrid:
                 absolute_distance += abs(q_event_proxy.offset() - offset)
                 count += 1
         if count:
-            return absolute_distance / count
+            fraction = absolute_distance / count
+            return abjad.Duration(fraction)
         return None
 
     @property
