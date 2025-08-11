@@ -99,7 +99,11 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         Gets preceding q-event proxies of q-grid leaf.
         """
-        return [x for x in self._q_event_proxies if x.offset() < self.start_offset()]
+        return [
+            x
+            for x in self._q_event_proxies
+            if x.value_offset() < self.value_start_offset()
+        ]
 
     @property
     def q_event_proxies(self) -> list[_qeventproxy.QEventProxy]:
@@ -121,7 +125,11 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
         """
         Gets succeeding q-event proxies of q-grid leaf.
         """
-        return [x for x in self._q_event_proxies if self.start_offset() <= x.offset()]
+        return [
+            x
+            for x in self._q_event_proxies
+            if self.value_start_offset() <= x.value_offset()
+        ]
 
 
 class QGridContainer(abjad.rhythmtrees.RhythmTreeContainer):
@@ -174,10 +182,10 @@ class QGrid:
         ``QGrid`` closest to their virtual offset:
 
         >>> q_grid = nauert.QGrid()
-        >>> q_event_a = nauert.PitchedQEvent(abjad.Offset(250), [0])
-        >>> q_event_b = nauert.PitchedQEvent(abjad.Offset(750), [1])
-        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.Offset(0.25))
-        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.Offset(0.75))
+        >>> q_event_a = nauert.PitchedQEvent(abjad.Offset(250).value_offset(), [0])
+        >>> q_event_b = nauert.PitchedQEvent(abjad.Offset(750).value_offset(), [1])
+        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.Offset(0.25).value_offset())
+        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.Offset(0.75).value_offset())
         >>> q_grid.fit_q_events([proxy_a, proxy_b])
 
         >>> for q_event_proxy in q_grid.root_node.q_event_proxies:
@@ -215,7 +223,7 @@ class QGrid:
         assert isinstance(next_downbeat, QGridLeaf)
         self._root_node = root_node
         self._next_downbeat = next_downbeat
-        self._next_downbeat._offset = abjad.Offset(1)
+        self._next_downbeat._offset = abjad.ValueOffset(abjad.Fraction(1))
         self._next_downbeat._offsets_are_current = True
 
     ### SPECIAL METHODS ###
@@ -299,15 +307,15 @@ class QGrid:
         ..  container:: example
 
             >>> q_grid = nauert.QGrid()
-            >>> q_event_a = nauert.PitchedQEvent(abjad.Offset(250), [0], ["A"])
-            >>> q_event_b = nauert.PitchedQEvent(abjad.Offset(750), [1], ["B"])
-            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.Offset(0.25))
-            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.Offset(0.75))
+            >>> q_event_a = nauert.PitchedQEvent(abjad.Offset(250).value_offset(), [0], ["A"])
+            >>> q_event_b = nauert.PitchedQEvent(abjad.Offset(750).value_offset(), [1], ["B"])
+            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.Offset(0.25).value_offset())
+            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.Offset(0.75).value_offset())
             >>> q_grid.fit_q_events([proxy_a, proxy_b])
             >>> print(q_grid.rtm_format())
             1
 
-            >>> pairs = zip(q_grid.leaves, q_grid.offsets, strict=True)
+            >>> pairs = zip(q_grid.leaves, q_grid.value_offsets, strict=True)
             >>> for index, (leaf, offset) in enumerate(pairs):
             ...     for q_event_proxy in leaf.q_event_proxies:
             ...         q_event = q_event_proxy.q_event
@@ -330,7 +338,7 @@ class QGrid:
             >>> print(q_grid.rtm_format())
             (1 ((1 (1 1)) 1))
 
-            >>> pairs = zip(q_grid.leaves, q_grid.offsets, strict=True)
+            >>> pairs = zip(q_grid.leaves, q_grid.value_offsets, strict=True)
             >>> for index, (leaf, offset) in enumerate(pairs):
             ...     for q_event_proxy in leaf.q_event_proxies:
             ...         q_event = q_event_proxy.q_event
@@ -349,9 +357,9 @@ class QGrid:
         """
         count = 0
         absolute_distance = abjad.Duration(0)
-        for leaf, offset in zip(self.leaves, self.offsets):
+        for leaf, offset in zip(self.leaves, self.value_offsets):
             for q_event_proxy in leaf.q_event_proxies:
-                absolute_distance += abs(q_event_proxy.offset() - offset)
+                absolute_distance += abs(q_event_proxy.value_offset() - offset)
                 count += 1
         if count:
             fraction = absolute_distance / count
@@ -377,11 +385,14 @@ class QGrid:
         return self._next_downbeat
 
     @property
-    def offsets(self) -> tuple[abjad.Offset, ...]:
+    def value_offsets(self) -> tuple[abjad.ValueOffset, ...]:
         """
         Gets the offsets between 0 and 1 of all of the leaf nodes in the QGrid.
         """
-        return tuple([x.start_offset() for x in self.leaves[:-1]] + [abjad.Offset(1)])
+        return tuple(
+            [x.value_start_offset() for x in self.leaves[:-1]]
+            + [abjad.ValueOffset(abjad.Fraction(1))]
+        )
 
     def pretty_rtm_format(self) -> str:
         """
@@ -412,15 +423,15 @@ class QGrid:
         ``QGridLeaf`` whose offset is nearest.
         """
         assert all(isinstance(x, _qeventproxy.QEventProxy) for x in q_event_proxies)
-        leaves, offsets = self.leaves, self.offsets
+        leaves, offsets = self.leaves, self.value_offsets
         for q_event_proxy in q_event_proxies:
-            idx = bisect.bisect_left(offsets, q_event_proxy.offset())
-            if q_event_proxy.offset() == offsets[idx]:
+            idx = bisect.bisect_left(offsets, q_event_proxy.value_offset())
+            if q_event_proxy.value_offset() == offsets[idx]:
                 leaves[idx].q_event_proxies.append(q_event_proxy)
             else:
                 left, right = offsets[idx - 1], offsets[idx]
-                left_diff = abs(left - q_event_proxy.offset())
-                right_diff = abs(right - q_event_proxy.offset())
+                left_diff = abs(left - q_event_proxy.value_offset())
+                right_diff = abs(right - q_event_proxy.value_offset())
                 if right_diff < left_diff:
                     leaves[idx].q_event_proxies.append(q_event_proxy)
                 else:
@@ -514,13 +525,13 @@ class QGrid:
         for i, leaf in enumerate(leaves_to_subdivide):
             next_leaf = all_leaves[all_leaves.index(leaf) + 1]
             if next_leaf is self.next_downbeat:
-                next_leaf_offset = abjad.Offset(1)
+                next_leaf_offset = abjad.ValueOffset(abjad.Fraction(1))
             else:
-                next_leaf_offset = next_leaf.start_offset()
-
+                # next_leaf_offset = next_leaf.start_offset()
+                next_leaf_offset = next_leaf.value_start_offset()
             q_event_proxies.extend(self.subdivide_leaf(leaf, subdivisions[i]))
             for q_event_proxy in tuple(next_leaf.q_event_proxies):
-                if q_event_proxy.offset() < next_leaf_offset:
+                if q_event_proxy.value_offset() < next_leaf_offset:
                     idx = next_leaf.q_event_proxies.index(q_event_proxy)
                     q_event_proxies.append(next_leaf.q_event_proxies.pop(idx))
         return q_event_proxies

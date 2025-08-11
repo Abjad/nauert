@@ -26,11 +26,11 @@ class QEvent(abc.ABC):
     @abc.abstractmethod
     def __init__(
         self,
-        offset: abjad.Offset = abjad.Offset(0),
+        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
         index: int | None = None,
         attachments: typing.Iterable = (),
     ) -> None:
-        assert isinstance(offset, abjad.Offset), repr(offset)
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         assert isinstance(attachments, collections.abc.Iterable), repr(attachments)
         self._offset = offset
         self._index = index
@@ -44,7 +44,7 @@ class QEvent(abc.ABC):
         q-event. Otherwise false.
         """
         if type(self) is type(self):
-            if self.offset < argument.offset:
+            if self.value_offset < argument.value_offset:
                 return True
         return False
 
@@ -53,7 +53,7 @@ class QEvent(abc.ABC):
         Gets repr.
         """
         class_name = type(self).__name__
-        string = f"{class_name}(offset={self.offset()!r}, index={self.index!r}"
+        string = f"{class_name}(offset={self.value_offset()!r}, index={self.index!r}"
         string += f", attachments={self.attachments!r})"
         return string
 
@@ -73,7 +73,7 @@ class QEvent(abc.ABC):
         """
         return self._index
 
-    def offset(self) -> abjad.Offset:
+    def value_offset(self) -> abjad.ValueOffset:
         """
         The offset in milliseconds of the event.
         """
@@ -81,8 +81,9 @@ class QEvent(abc.ABC):
 
     @classmethod
     def from_offset_pitches_attachments(
-        class_, offset, pitches, attachments
+        class_, offset: abjad.ValueOffset, pitches, attachments
     ) -> "QEvent":
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         assert isinstance(attachments, collections.abc.Iterable), repr(attachments)
         match pitches:
             case collections.abc.Iterable():
@@ -105,8 +106,8 @@ class PitchedQEvent(QEvent):
     ..  container:: example
 
         >>> pitches = [0, 1, 4]
-        >>> nauert.PitchedQEvent(abjad.Offset(1000), pitches)
-        PitchedQEvent(offset=Offset(1000, 1), pitches=...)
+        >>> nauert.PitchedQEvent(abjad.Offset(1000).value_offset(), pitches)
+        PitchedQEvent(offset=ValueOffset(fraction=Fraction(1000, 1), displacement=None), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=())
 
     """
 
@@ -118,12 +119,12 @@ class PitchedQEvent(QEvent):
 
     def __init__(
         self,
-        offset: abjad.Offset = abjad.Offset(0),
+        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
         pitches: typing.Iterable[int | float] = (),
         attachments: typing.Iterable = (),
         index: int | None = None,
     ):
-        assert isinstance(offset, abjad.Offset), repr(offset)
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         QEvent.__init__(self, offset=offset, index=index)
         self._pitches = tuple([abjad.NamedPitch(x) for x in pitches])
         self._attachments = tuple(attachments)
@@ -138,7 +139,7 @@ class PitchedQEvent(QEvent):
         """
         if (
             type(self) is type(argument)
-            and self.offset() == argument.offset()
+            and self.value_offset() == argument.value_offset()
             and self.pitches == argument.pitches
             and self.attachments == argument.attachments
             and self.index == argument.index
@@ -158,7 +159,7 @@ class PitchedQEvent(QEvent):
         """
         Gets repr.
         """
-        string = f"{type(self).__name__}(offset={self.offset()!r},"
+        string = f"{type(self).__name__}(offset={self.value_offset()!r},"
         string += f" pitches={self.pitches!r}, index={self.index!r},"
         string += f" attachments={self.attachments!r})"
         return string
@@ -186,9 +187,9 @@ class SilentQEvent(QEvent):
 
     ..  container:: example
 
-        >>> q_event = nauert.SilentQEvent(abjad.Offset(1000))
+        >>> q_event = nauert.SilentQEvent(abjad.Offset(1000).value_offset())
         >>> q_event
-        SilentQEvent(offset=Offset(1000, 1), index=None, attachments=())
+        SilentQEvent(offset=ValueOffset(fraction=Fraction(1000, 1), displacement=None), index=None, attachments=())
 
     """
 
@@ -200,11 +201,11 @@ class SilentQEvent(QEvent):
 
     def __init__(
         self,
-        offset: abjad.Offset = abjad.Offset(0),
+        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
         attachments: typing.Iterable = (),
         index: int | None = None,
     ):
-        assert isinstance(offset, abjad.Offset), repr(offset)
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         QEvent.__init__(self, offset=offset, index=index)
         if attachments is None:
             attachments = ()
@@ -252,8 +253,8 @@ class TerminalQEvent(QEvent):
 
     ..  container:: example
 
-        >>> nauert.TerminalQEvent(abjad.Offset(1000))
-        TerminalQEvent(offset=Offset(1000, 1), index=None, attachments=())
+        >>> nauert.TerminalQEvent(abjad.Offset(1000).value_offset())
+        TerminalQEvent(offset=ValueOffset(fraction=Fraction(1000, 1), displacement=None), index=None, attachments=())
 
     Carries no significance outside the context of a ``QEventSequence``.
     """
@@ -264,8 +265,10 @@ class TerminalQEvent(QEvent):
 
     ### INITIALIZER ###
 
-    def __init__(self, offset: abjad.Offset = abjad.Offset(0)) -> None:
-        assert isinstance(offset, abjad.Offset), repr(offset)
+    def __init__(
+        self, offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0))
+    ) -> None:
+        assert isinstance(offset, abjad.ValueOffset), repr(offset)
         QEvent.__init__(self, offset=offset)
 
     ### SPECIAL METHODS ###
@@ -275,7 +278,10 @@ class TerminalQEvent(QEvent):
         Is true when `argument` is a terminal q-event with offset equal to that
         of this terminal q-event. Otherwise false.
         """
-        if type(self) is type(argument) and self.offset() == argument.offset():
+        if (
+            type(self) is type(argument)
+            and self.value_offset() == argument.value_offset()
+        ):
             return True
         return False
 

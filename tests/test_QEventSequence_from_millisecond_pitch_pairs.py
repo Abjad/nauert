@@ -10,15 +10,21 @@ def test_QEventSequence_from_millisecond_pitch_pairs_01():
     q_events = nauert.QEventSequence.from_millisecond_pitch_pairs(pairs)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(100, 1)),
             nauert.PitchedQEvent(
-                abjad.Offset(400, 1),
+                abjad.Offset(0).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(100, 1).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(400, 1).value_offset(),
                 (abjad.NamedPitch("cs'"), abjad.NamedPitch("e'")),
             ),
-            nauert.SilentQEvent(abjad.Offset(700, 1)),
-            nauert.PitchedQEvent(abjad.Offset(1050, 1), (abjad.NamedPitch("f'"),)),
-            nauert.PitchedQEvent(abjad.Offset(1450, 1), (abjad.NamedPitch("g'"),)),
-            nauert.TerminalQEvent(abjad.Offset(2050, 1)),
+            nauert.SilentQEvent(abjad.Offset(700, 1).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(1050, 1).value_offset(), (abjad.NamedPitch("f'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(1450, 1).value_offset(), (abjad.NamedPitch("g'"),)
+            ),
+            nauert.TerminalQEvent(abjad.Offset(2050, 1).value_offset()),
         )
     )

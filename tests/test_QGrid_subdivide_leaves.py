@@ -5,23 +5,34 @@ import nauert
 
 def test_QGrid_subdivide_leaves_01():
     q_grid = nauert.QGrid()
-    a = nauert.QEventProxy(nauert.SilentQEvent(abjad.Offset(0), ["A"]), abjad.Offset(0))
+    a = nauert.QEventProxy(
+        nauert.SilentQEvent(abjad.Offset(0).value_offset(), ["A"]),
+        abjad.Offset(0).value_offset(),
+    )
     b = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(1, 20), ["B"]), abjad.Offset(1, 20)
+        nauert.SilentQEvent(abjad.Offset(1, 20).value_offset(), ["B"]),
+        abjad.Offset(1, 20).value_offset(),
     )
     c = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(9, 20), ["C"]), abjad.Offset(9, 20)
+        nauert.SilentQEvent(abjad.Offset(9, 20).value_offset(), ["C"]),
+        abjad.Offset(9, 20).value_offset(),
     )
     d = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(1, 2), ["D"]), abjad.Offset(1, 2)
+        nauert.SilentQEvent(abjad.Offset(1, 2).value_offset(), ["D"]),
+        abjad.Offset(1, 2).value_offset(),
     )
     e = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(11, 20), ["E"]), abjad.Offset(11, 20)
+        nauert.SilentQEvent(abjad.Offset(11, 20).value_offset(), ["E"]),
+        abjad.Offset(11, 20).value_offset(),
     )
     f = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(19, 20), ["F"]), abjad.Offset(19, 20)
+        nauert.SilentQEvent(abjad.Offset(19, 20).value_offset(), ["F"]),
+        abjad.Offset(19, 20).value_offset(),
     )
-    g = nauert.QEventProxy(nauert.SilentQEvent(abjad.Offset(1), ["G"]), abjad.Offset(1))
+    g = nauert.QEventProxy(
+        nauert.SilentQEvent(abjad.Offset(1).value_offset(), ["G"]),
+        abjad.Offset(1).value_offset(),
+    )
     q_grid.leaves[0].q_event_proxies.extend([a, b, c, d])
     q_grid.leaves[1].q_event_proxies.extend([e, f, g])
     assert q_grid.root_node.rtm_format() == "1"
@@ -40,23 +51,34 @@ def test_QGrid_subdivide_leaves_01():
 
 def test_QGrid_subdivide_leaves_02():
     q_grid = nauert.QGrid()
-    a = nauert.QEventProxy(nauert.SilentQEvent(abjad.Offset(0), ["A"]), abjad.Offset(0))
+    a = nauert.QEventProxy(
+        nauert.SilentQEvent(abjad.Offset(0).value_offset(), ["A"]),
+        abjad.Offset(0).value_offset(),
+    )
     b = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(1, 20), ["B"]), abjad.Offset(1, 20)
+        nauert.SilentQEvent(abjad.Offset(1, 20).value_offset(), ["B"]),
+        abjad.Offset(1, 20).value_offset(),
     )
     c = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(9, 20), ["C"]), abjad.Offset(9, 20)
+        nauert.SilentQEvent(abjad.Offset(9, 20).value_offset(), ["C"]),
+        abjad.Offset(9, 20).value_offset(),
     )
     d = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(1, 2), ["D"]), abjad.Offset(1, 2)
+        nauert.SilentQEvent(abjad.Offset(1, 2).value_offset(), ["D"]),
+        abjad.Offset(1, 2).value_offset(),
     )
     e = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(11, 20), ["E"]), abjad.Offset(11, 20)
+        nauert.SilentQEvent(abjad.Offset(11, 20).value_offset(), ["E"]),
+        abjad.Offset(11, 20).value_offset(),
     )
     f = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.Offset(19, 20), ["F"]), abjad.Offset(19, 20)
+        nauert.SilentQEvent(abjad.Offset(19, 20).value_offset(), ["F"]),
+        abjad.Offset(19, 20).value_offset(),
     )
-    g = nauert.QEventProxy(nauert.SilentQEvent(abjad.Offset(1), ["G"]), abjad.Offset(1))
+    g = nauert.QEventProxy(
+        nauert.SilentQEvent(abjad.Offset(1).value_offset(), ["G"]),
+        abjad.Offset(1).value_offset(),
+    )
     q_grid.leaves[0].q_event_proxies.extend([a, b, c, d])
     q_grid.leaves[1].q_event_proxies.extend([e, f, g])
     assert q_grid.root_node.rtm_format() == "1"

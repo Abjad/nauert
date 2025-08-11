@@ -24,22 +24,32 @@ def test_QEventSequence_from_tempo_scaled_leaves_01():
     q_events = nauert.QEventSequence.from_tempo_scaled_leaves(leaves, tempo)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0, 1), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(12000, 11)),
-            nauert.PitchedQEvent(abjad.Offset(30000, 11), (abjad.NamedPitch("cs'"),)),
-            nauert.PitchedQEvent(abjad.Offset(42000, 11), (abjad.NamedPitch("d'"),)),
-            nauert.PitchedQEvent(abjad.Offset(54000, 11), (abjad.NamedPitch("ef'"),)),
-            nauert.SilentQEvent(abjad.Offset(60000, 11)),
-            nauert.PitchedQEvent(abjad.Offset(84000, 11), (abjad.NamedPitch("ef'"),)),
             nauert.PitchedQEvent(
-                abjad.Offset(90000, 11),
+                abjad.Offset(0, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(12000, 11).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(30000, 11).value_offset(), (abjad.NamedPitch("cs'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(42000, 11).value_offset(), (abjad.NamedPitch("d'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(54000, 11).value_offset(), (abjad.NamedPitch("ef'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(60000, 11).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(84000, 11).value_offset(), (abjad.NamedPitch("ef'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(90000, 11).value_offset(),
                 (
                     abjad.NamedPitch("c'"),
                     abjad.NamedPitch("cs'"),
                     abjad.NamedPitch("e'"),
                 ),
             ),
-            nauert.TerminalQEvent(abjad.Offset(102000, 11)),
+            nauert.TerminalQEvent(abjad.Offset(102000, 11).value_offset()),
         )
     )
 
@@ -68,23 +78,31 @@ def test_QEventSequence_from_tempo_scaled_leaves_02():
     q_events = nauert.QEventSequence.from_tempo_scaled_leaves(leaves)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0, 1), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(30000, 29)),
-            nauert.PitchedQEvent(abjad.Offset(75000, 29), (abjad.NamedPitch("cs'"),)),
-            nauert.PitchedQEvent(abjad.Offset(105000, 29), (abjad.NamedPitch("d'"),)),
-            nauert.PitchedQEvent(abjad.Offset(135000, 29), (abjad.NamedPitch("ef'"),)),
-            nauert.SilentQEvent(abjad.Offset(150000, 29)),
             nauert.PitchedQEvent(
-                abjad.Offset(15600000, 2233), (abjad.NamedPitch("ef'"),)
+                abjad.Offset(0, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(30000, 29).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(75000, 29).value_offset(), (abjad.NamedPitch("cs'"),)
             ),
             nauert.PitchedQEvent(
-                abjad.Offset(16470000, 2233),
+                abjad.Offset(105000, 29).value_offset(), (abjad.NamedPitch("d'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(135000, 29).value_offset(), (abjad.NamedPitch("ef'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(150000, 29).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(15600000, 2233).value_offset(), (abjad.NamedPitch("ef'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(16470000, 2233).value_offset(),
                 (
                     abjad.NamedPitch("c'"),
                     abjad.NamedPitch("cs'"),
                     abjad.NamedPitch("e'"),
                 ),
             ),
-            nauert.TerminalQEvent(abjad.Offset(18210000, 2233)),
+            nauert.TerminalQEvent(abjad.Offset(18210000, 2233).value_offset()),
         )
     )
