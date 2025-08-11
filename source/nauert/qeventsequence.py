@@ -54,10 +54,10 @@ class QEventSequence:
                 isinstance(q_event, q_event_classes) for q_event in sequence[:-1]
             )
             assert isinstance(sequence[-1], _qevents.TerminalQEvent)
-            offsets = [x.offset() for x in sequence]
+            offsets = [x.value_offset() for x in sequence]
             offset_sequence = list(offsets)
             assert abjad.sequence.is_increasing(offset_sequence, strict=False)
-            assert 0 <= sequence[0].offset()
+            assert 0 <= sequence[0].value_offset().fraction
             self._sequence = tuple(sequence)
 
     ### SPECIAL METHODS ###
@@ -129,7 +129,7 @@ class QEventSequence:
         Duration(4000, 1)
 
         """
-        return abjad.Duration(self[-1].offset())
+        return abjad.Duration(self[-1].value_offset().fraction)
 
     @property
     def sequence(self) -> tuple:
@@ -183,7 +183,7 @@ class QEventSequence:
         else:
             durations = milliseconds
         sums = abjad.math.cumulative_sums([abs(_) for _ in durations])
-        offsets = [abjad.Offset(_) for _ in sums]
+        offsets = [abjad.Offset(_).value_offset() for _ in sums]
         q_events: list[_qevents.QEvent] = []
         for offset, duration in zip(offsets, durations):
             q_event: _qevents.QEvent
@@ -198,13 +198,13 @@ class QEventSequence:
 
     @classmethod
     def from_millisecond_offsets(
-        class_, offsets: typing.Sequence[abjad.Offset]
+        class_, offsets: typing.Sequence[abjad.ValueOffset]
     ) -> "QEventSequence":
         r"""
         Changes millisecond ``offsets`` to ``QEventSequence``:
 
         >>> numbers = [0, 250, 750, 1750, 3000, 4000]
-        >>> offsets = [abjad.Offset(_) for _ in numbers]
+        >>> offsets = [abjad.Offset(_).value_offset() for _ in numbers]
         >>> sequence = nauert.QEventSequence.from_millisecond_offsets(offsets)
         >>> for q_event in sequence:
         ...     q_event
@@ -217,7 +217,7 @@ class QEventSequence:
         TerminalQEvent(...)
 
         """
-        assert all(isinstance(_, abjad.Offset) for _ in offsets), repr(offsets)
+        assert all(isinstance(_, abjad.ValueOffset) for _ in offsets), repr(offsets)
         q_events: list[_qevents.QEvent] = []
         q_events.extend([_qevents.PitchedQEvent(_, [0]) for _ in offsets[:-1]])
         q_events.append(_qevents.TerminalQEvent(offsets[-1]))
@@ -273,7 +273,8 @@ class QEventSequence:
                 groups.append((duration, None, ()))
         # find offsets
         offsets = abjad.math.cumulative_sums([abs(_[0]) for _ in groups])
-        offsets = [abjad.Offset(_) for _ in offsets]
+        durations = [abjad.Duration(_) for _ in offsets]
+        offsets = [abjad.ValueOffset(_.fraction()) for _ in durations]
         # build QEvents
         q_events = [
             _qevents.QEvent.from_offset_pitches_attachments(
@@ -351,10 +352,10 @@ class QEventSequence:
         durations = [x for x in abjad.sequence.sum_by_sign(durations, sign=[-1]) if x]
         durations = [tempo.duration_to_milliseconds(_) for _ in durations]
         offsets = abjad.math.cumulative_sums([abs(_) for _ in durations])
-        offsets = [abjad.Offset(_) for _ in offsets]
+        offsets = [abjad.Offset(_).value_offset() for _ in offsets]
         q_events = []
         for offset, duration in zip(offsets, durations):
-            offset = abjad.Offset(offset)
+            offset = abjad.ValueOffset(offset.fraction)
             assert isinstance(duration, abjad.Duration)
             q_event: _qevents.QEvent
             # negative duration indicates silence

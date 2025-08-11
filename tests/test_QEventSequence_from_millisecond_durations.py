@@ -61,52 +61,142 @@ def test_QEventSequence_from_millisecond_durations_01():
     q_events = nauert.QEventSequence.from_millisecond_durations(durations)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(163, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(511, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(627, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(1208, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(1417, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(1997, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(3204, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(3297, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(4087, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(4296, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(4830, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(6362, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(6595, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(6687, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(7013, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(7245, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(7872, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(8197, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(8359, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(8638, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(8731, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(8917, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(9288, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(9404, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(10240, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(10356, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(10496, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(10890, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(11169, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(11285, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(11424, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(12307, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(12957, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(13073, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(13653, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(13979, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(14234, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(15256, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(15883, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(16022, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(16649, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(16927, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(17044, 1), (abjad.NamedPitch("c'"),)),
-            nauert.PitchedQEvent(abjad.Offset(17276, 1), (abjad.NamedPitch("c'"),)),
-            nauert.TerminalQEvent(abjad.Offset(18483, 1)),
+            nauert.PitchedQEvent(
+                abjad.Offset(0, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(163, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(511, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(627, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(1208, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(1417, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(1997, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(3204, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(3297, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(4087, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(4296, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(4830, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(6362, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(6595, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(6687, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(7013, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(7245, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(7872, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(8197, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(8359, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(8638, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(8731, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(8917, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(9288, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(9404, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(10240, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(10356, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(10496, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(10890, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(11169, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(11285, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(11424, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(12307, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(12957, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(13073, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(13653, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(13979, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(14234, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(15256, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(15883, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(16022, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(16649, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(16927, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(17044, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.Offset(17276, 1).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.TerminalQEvent(abjad.Offset(18483, 1).value_offset()),
         )
     )
 
@@ -122,13 +212,19 @@ def test_QEventSequence_from_millisecond_durations_02():
     )
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(100)),
-            nauert.PitchedQEvent(abjad.Offset(200), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(300)),
-            nauert.SilentQEvent(abjad.Offset(400)),
-            nauert.PitchedQEvent(abjad.Offset(500), (abjad.NamedPitch("c'"),)),
-            nauert.TerminalQEvent(abjad.Offset(600)),
+            nauert.PitchedQEvent(
+                abjad.Offset(0).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(100).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(200).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(300).value_offset()),
+            nauert.SilentQEvent(abjad.Offset(400).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(500).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.TerminalQEvent(abjad.Offset(600).value_offset()),
         )
     )
 
@@ -144,11 +240,17 @@ def test_QEventSequence_from_millisecond_durations_03():
     )
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.Offset(0), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(100)),
-            nauert.PitchedQEvent(abjad.Offset(200), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.Offset(300)),
-            nauert.PitchedQEvent(abjad.Offset(500), (abjad.NamedPitch("c'"),)),
-            nauert.TerminalQEvent(abjad.Offset(600)),
+            nauert.PitchedQEvent(
+                abjad.Offset(0).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(100).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(200).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.SilentQEvent(abjad.Offset(300).value_offset()),
+            nauert.PitchedQEvent(
+                abjad.Offset(500).value_offset(), (abjad.NamedPitch("c'"),)
+            ),
+            nauert.TerminalQEvent(abjad.Offset(600).value_offset()),
         )
     )

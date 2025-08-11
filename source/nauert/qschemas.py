@@ -76,9 +76,9 @@ class QSchema(abc.ABC):
         """
         assert isinstance(duration, abjad.Duration), repr(duration)
         target_items = []
-        idx, current_offset = 0, abjad.Offset(0)
+        idx, current_offset = 0, abjad.ValueOffset(abjad.Fraction(0))
         duration = abjad.Duration(duration)
-        while current_offset < duration:
+        while current_offset.fraction < duration:
             lookup = self[idx]
             lookup["offset_in_ms"] = current_offset
             target_item = self.target_item_class(**lookup)

@@ -41,11 +41,10 @@ class QTarget(abc.ABC):
         assert all(isinstance(x, self.item_class) for x in items)
         self._items: typing.Sequence[_qtargetitems.QTargetItem] = ()
         if len(items) > 0:
-            self._items = tuple(sorted(items, key=lambda x: x.offset_in_ms))
+            self._items = tuple(sorted(items, key=lambda x: x.value_offset_in_ms))
 
     ### SPECIAL METHODS ###
 
-    # TODO: typehint
     def __call__(
         self,
         q_event_sequence: _qeventsequence.QEventSequence,
@@ -85,9 +84,9 @@ class QTarget(abc.ABC):
             raise TypeError(message)
         # parcel QEvents out to each beat
         beats = self.beats
-        offsets = sorted([beat.offset_in_ms for beat in beats])
+        offsets = sorted([beat.value_offset_in_ms for beat in beats])
         for q_event in q_event_sequence:
-            index = bisect.bisect(offsets, q_event.offset()) - 1
+            index = bisect.bisect(offsets, q_event.value_offset()) - 1
             beat = beats[index]
             beat.q_events.append(q_event)
         # generate QuantizationJobs and process with the JobHandler
@@ -220,7 +219,7 @@ class QTarget(abc.ABC):
         Gets duration of q-target in milliseconds.
         """
         last_item = self._items[-1]
-        return last_item.offset_in_ms + last_item.duration_in_ms
+        return last_item.value_offset_in_ms.fraction + last_item.duration_in_ms
 
     @abc.abstractproperty
     def item_class(self):
