@@ -185,7 +185,7 @@ class QTargetBeat(QTargetItem):
         ... )
 
         >>> q_target_beat.value_offset_in_ms
-        ValueOffset(fraction=Fraction(1500, 1), displacement=None)
+        ValueOffset(Fraction(1500, 1))
 
         """
         return self._offset_in_ms
@@ -409,10 +409,10 @@ class QTargetMeasure(QTargetItem):
             >>> for q_target_beat in q_target_measure.beats:
             ...     q_target_beat.value_offset_in_ms
             ...
-            ValueOffset(fraction=Fraction(1000, 1), displacement=None)
-            ValueOffset(fraction=Fraction(2000, 1), displacement=None)
-            ValueOffset(fraction=Fraction(3000, 1), displacement=None)
-            ValueOffset(fraction=Fraction(4000, 1), displacement=None)
+            ValueOffset(Fraction(1000, 1))
+            ValueOffset(Fraction(2000, 1))
+            ValueOffset(Fraction(3000, 1))
+            ValueOffset(Fraction(4000, 1))
 
         """
         return self._beats
@@ -460,7 +460,7 @@ class QTargetMeasure(QTargetItem):
             ... )
 
             >>> q_target_measure.value_offset_in_ms
-            ValueOffset(fraction=Fraction(1000, 1), displacement=None)
+            ValueOffset(Fraction(1000, 1))
 
         """
         return self._offset_in_ms

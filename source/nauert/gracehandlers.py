@@ -491,8 +491,8 @@ class DiscardingGraceHandler(GraceHandler):
 
         >>> for pqe in grace_handler.discarded_q_events[0]:
         ...     pqe
-        PitchedQEvent(offset=ValueOffset(fraction=Fraction(1000, 1), displacement=None), pitches=(NamedPitch("cs'"),), index=None, attachments=())
-        PitchedQEvent(offset=ValueOffset(fraction=Fraction(1001, 1), displacement=None), pitches=(NamedPitch("d'"),), index=None, attachments=())
+        PitchedQEvent(offset=ValueOffset(Fraction(1000, 1)), pitches=(NamedPitch("cs'"),), index=None, attachments=())
+        PitchedQEvent(offset=ValueOffset(Fraction(1001, 1)), pitches=(NamedPitch("d'"),), index=None, attachments=())
 
     """
 

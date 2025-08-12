@@ -15,7 +15,7 @@ class QEventProxy:
 
         >>> q_event = nauert.PitchedQEvent(abjad.Offset(130).value_offset(), [0, 1, 4])
         >>> nauert.QEventProxy(q_event, abjad.Offset(0.5).value_offset())
-        QEventProxy(q_event=PitchedQEvent(offset=ValueOffset(fraction=Fraction(130, 1), displacement=None), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=()), offset=ValueOffset(fraction=Fraction(1, 2), displacement=None))
+        QEventProxy(q_event=PitchedQEvent(offset=ValueOffset(Fraction(130, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=()), offset=ValueOffset(Fraction(1, 2)))
 
     Not composer-safe.
 
