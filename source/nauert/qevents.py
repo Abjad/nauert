@@ -106,7 +106,7 @@ class PitchedQEvent(QEvent):
     ..  container:: example
 
         >>> pitches = [0, 1, 4]
-        >>> nauert.PitchedQEvent(abjad.Offset(1000).value_offset(), pitches)
+        >>> nauert.PitchedQEvent(abjad.mvo(1000), pitches)
         PitchedQEvent(offset=ValueOffset(Fraction(1000, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=())
 
     """
@@ -187,7 +187,7 @@ class SilentQEvent(QEvent):
 
     ..  container:: example
 
-        >>> q_event = nauert.SilentQEvent(abjad.Offset(1000).value_offset())
+        >>> q_event = nauert.SilentQEvent(abjad.mvo(1000))
         >>> q_event
         SilentQEvent(offset=ValueOffset(Fraction(1000, 1)), index=None, attachments=())
 
@@ -253,7 +253,7 @@ class TerminalQEvent(QEvent):
 
     ..  container:: example
 
-        >>> nauert.TerminalQEvent(abjad.Offset(1000).value_offset())
+        >>> nauert.TerminalQEvent(abjad.mvo(1000))
         TerminalQEvent(offset=ValueOffset(Fraction(1000, 1)), index=None, attachments=())
 
     Carries no significance outside the context of a ``QEventSequence``.
