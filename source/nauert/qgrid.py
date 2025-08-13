@@ -223,7 +223,7 @@ class QGrid:
         assert isinstance(next_downbeat, QGridLeaf)
         self._root_node = root_node
         self._next_downbeat = next_downbeat
-        self._next_downbeat._offset = abjad.ValueOffset(abjad.Fraction(1))
+        self._next_downbeat._offset = abjad.Offset(abjad.Fraction(1))
         self._next_downbeat._offsets_are_current = True
 
     ### SPECIAL METHODS ###
@@ -385,13 +385,13 @@ class QGrid:
         return self._next_downbeat
 
     @property
-    def value_offsets(self) -> tuple[abjad.ValueOffset, ...]:
+    def value_offsets(self) -> tuple[abjad.Offset, ...]:
         """
         Gets the offsets between 0 and 1 of all of the leaf nodes in the QGrid.
         """
         return tuple(
             [x.value_start_offset() for x in self.leaves[:-1]]
-            + [abjad.ValueOffset(abjad.Fraction(1))]
+            + [abjad.Offset(abjad.Fraction(1))]
         )
 
     def pretty_rtm_format(self) -> str:
@@ -525,7 +525,7 @@ class QGrid:
         for i, leaf in enumerate(leaves_to_subdivide):
             next_leaf = all_leaves[all_leaves.index(leaf) + 1]
             if next_leaf is self.next_downbeat:
-                next_leaf_offset = abjad.ValueOffset(abjad.Fraction(1))
+                next_leaf_offset = abjad.Offset(abjad.Fraction(1))
             else:
                 # next_leaf_offset = next_leaf.start_offset()
                 next_leaf_offset = next_leaf.value_start_offset()

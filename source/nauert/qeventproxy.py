@@ -15,7 +15,7 @@ class QEventProxy:
 
         >>> q_event = nauert.PitchedQEvent(abjad.mvo(130), [0, 1, 4])
         >>> nauert.QEventProxy(q_event, abjad.mvo(0.5))
-        QEventProxy(q_event=PitchedQEvent(offset=ValueOffset(Fraction(130, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=()), offset=ValueOffset(Fraction(1, 2)))
+        QEventProxy(q_event=PitchedQEvent(offset=Offset(Fraction(130, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=()), offset=Offset(Fraction(1, 2)))
 
     Not composer-safe.
 
@@ -31,30 +31,30 @@ class QEventProxy:
     def __init__(
         self,
         q_event: _qevents.QEvent | None = None,
-        *offsets: abjad.ValueOffset,
+        *offsets: abjad.Offset,
     ) -> None:
-        assert all(isinstance(_, abjad.ValueOffset) for _ in offsets), repr(offsets)
+        assert all(isinstance(_, abjad.Offset) for _ in offsets), repr(offsets)
         if len(offsets) == 1:
-            offset = abjad.ValueOffset(offsets[0].fraction)
+            offset = abjad.Offset(offsets[0].fraction)
             assert isinstance(q_event, _qevents.QEvent)
             assert 0 <= offset.fraction <= 1
         elif len(offsets) == 2:
             minimum, maximum = (
-                abjad.ValueOffset(offsets[0].fraction),
-                abjad.ValueOffset(offsets[1].fraction),
+                abjad.Offset(offsets[0].fraction),
+                abjad.Offset(offsets[1].fraction),
             )
             assert isinstance(q_event, _qevents.QEvent)
             assert minimum <= q_event.value_offset() <= maximum
             fraction = (q_event.value_offset() - minimum) / (maximum - minimum)
-            offset = abjad.ValueOffset(fraction)
+            offset = abjad.Offset(fraction)
         elif len(offsets) == 0:
             assert q_event is None
-            offset = abjad.ValueOffset(abjad.Fraction(0))
+            offset = abjad.Offset(abjad.Fraction(0))
         else:
             message = f"can not initialize {type(self).__name__}: {offsets!r}."
             raise ValueError(message)
         self._q_event = q_event
-        self._offset = abjad.ValueOffset(offset.fraction)
+        self._offset = abjad.Offset(offset.fraction)
 
     ### SPECIAL METHODS ###
 
@@ -97,7 +97,7 @@ class QEventProxy:
         assert self._q_event is not None, "There is no QEvent is this proxy."
         return self._q_event.index
 
-    def value_offset(self) -> abjad.ValueOffset:
+    def value_offset(self) -> abjad.Offset:
         """
         Gets offset of q-event proxy.
         """

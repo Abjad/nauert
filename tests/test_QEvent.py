@@ -115,5 +115,5 @@ def test_QEvent_from_offset_pitches_attachments():
 def test_QEvent_from_offset_pitches_attachments_with_incorrectly_typed_pitches():
     with pytest.raises(TypeError):
         nauert.QEvent.from_offset_pitches_attachments(
-            abjad.ValueOffset(abjad.Fraction(100)), decimal.Decimal(0), ("foo",)
+            abjad.Offset(abjad.Fraction(100)), decimal.Decimal(0), ("foo",)
         )

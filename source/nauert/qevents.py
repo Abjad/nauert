@@ -26,11 +26,11 @@ class QEvent(abc.ABC):
     @abc.abstractmethod
     def __init__(
         self,
-        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
+        offset: abjad.Offset = abjad.Offset(abjad.Fraction(0)),
         index: int | None = None,
         attachments: typing.Iterable = (),
     ) -> None:
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         assert isinstance(attachments, collections.abc.Iterable), repr(attachments)
         self._offset = offset
         self._index = index
@@ -73,7 +73,7 @@ class QEvent(abc.ABC):
         """
         return self._index
 
-    def value_offset(self) -> abjad.ValueOffset:
+    def value_offset(self) -> abjad.Offset:
         """
         The offset in milliseconds of the event.
         """
@@ -81,9 +81,9 @@ class QEvent(abc.ABC):
 
     @classmethod
     def from_offset_pitches_attachments(
-        class_, offset: abjad.ValueOffset, pitches, attachments
+        class_, offset: abjad.Offset, pitches, attachments
     ) -> "QEvent":
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         assert isinstance(attachments, collections.abc.Iterable), repr(attachments)
         match pitches:
             case collections.abc.Iterable():
@@ -107,7 +107,7 @@ class PitchedQEvent(QEvent):
 
         >>> pitches = [0, 1, 4]
         >>> nauert.PitchedQEvent(abjad.mvo(1000), pitches)
-        PitchedQEvent(offset=ValueOffset(Fraction(1000, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=())
+        PitchedQEvent(offset=Offset(Fraction(1000, 1)), pitches=(NamedPitch("c'"), NamedPitch("cs'"), NamedPitch("e'")), index=None, attachments=())
 
     """
 
@@ -119,12 +119,12 @@ class PitchedQEvent(QEvent):
 
     def __init__(
         self,
-        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
+        offset: abjad.Offset = abjad.Offset(abjad.Fraction(0)),
         pitches: typing.Iterable[int | float] = (),
         attachments: typing.Iterable = (),
         index: int | None = None,
     ):
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         QEvent.__init__(self, offset=offset, index=index)
         self._pitches = tuple([abjad.NamedPitch(x) for x in pitches])
         self._attachments = tuple(attachments)
@@ -189,7 +189,7 @@ class SilentQEvent(QEvent):
 
         >>> q_event = nauert.SilentQEvent(abjad.mvo(1000))
         >>> q_event
-        SilentQEvent(offset=ValueOffset(Fraction(1000, 1)), index=None, attachments=())
+        SilentQEvent(offset=Offset(Fraction(1000, 1)), index=None, attachments=())
 
     """
 
@@ -201,11 +201,11 @@ class SilentQEvent(QEvent):
 
     def __init__(
         self,
-        offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0)),
+        offset: abjad.Offset = abjad.Offset(abjad.Fraction(0)),
         attachments: typing.Iterable = (),
         index: int | None = None,
     ):
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+        assert isinstance(offset, abjad.Offset), repr(offset)
         QEvent.__init__(self, offset=offset, index=index)
         if attachments is None:
             attachments = ()
@@ -254,7 +254,7 @@ class TerminalQEvent(QEvent):
     ..  container:: example
 
         >>> nauert.TerminalQEvent(abjad.mvo(1000))
-        TerminalQEvent(offset=ValueOffset(Fraction(1000, 1)), index=None, attachments=())
+        TerminalQEvent(offset=Offset(Fraction(1000, 1)), index=None, attachments=())
 
     Carries no significance outside the context of a ``QEventSequence``.
     """
@@ -265,10 +265,8 @@ class TerminalQEvent(QEvent):
 
     ### INITIALIZER ###
 
-    def __init__(
-        self, offset: abjad.ValueOffset = abjad.ValueOffset(abjad.Fraction(0))
-    ) -> None:
-        assert isinstance(offset, abjad.ValueOffset), repr(offset)
+    def __init__(self, offset: abjad.Offset = abjad.Offset(abjad.Fraction(0))) -> None:
+        assert isinstance(offset, abjad.Offset), repr(offset)
         QEvent.__init__(self, offset=offset)
 
     ### SPECIAL METHODS ###
