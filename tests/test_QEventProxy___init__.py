@@ -4,16 +4,14 @@ import nauert
 
 
 def test_QEventProxy___init___01():
-    q_event = nauert.PitchedQEvent(abjad.Offset(130).value_offset(), [0])
-    proxy = nauert.QEventProxy(q_event, abjad.Offset(0.5).value_offset())
+    q_event = nauert.PitchedQEvent(abjad.mvo(130), [0])
+    proxy = nauert.QEventProxy(q_event, abjad.mvo(0.5))
     assert proxy.q_event == q_event
-    assert proxy.value_offset() == abjad.Offset(1, 2).value_offset()
+    assert proxy.value_offset() == abjad.mvo(1, 2)
 
 
 def test_QEventProxy___init___02():
-    q_event = nauert.PitchedQEvent(abjad.Offset(130).value_offset(), [0, 1, 4])
-    proxy = nauert.QEventProxy(
-        q_event, abjad.Offset(100).value_offset(), abjad.Offset(1000).value_offset()
-    )
+    q_event = nauert.PitchedQEvent(abjad.mvo(130), [0, 1, 4])
+    proxy = nauert.QEventProxy(q_event, abjad.mvo(100), abjad.mvo(1000))
     assert proxy.q_event == q_event
-    assert proxy.value_offset() == abjad.Offset(1, 30).value_offset()
+    assert proxy.value_offset() == abjad.mvo(1, 30)

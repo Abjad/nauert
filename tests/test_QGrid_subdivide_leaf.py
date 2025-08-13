@@ -6,24 +6,24 @@ import nauert
 def test_QGrid_subdivide_leaf_01():
     q_grid = nauert.QGrid()
     a = nauert.QEventProxy(
-        nauert.PitchedQEvent(abjad.Offset(0).value_offset(), [0]),
-        abjad.Offset(0).value_offset(),
+        nauert.PitchedQEvent(abjad.mvo(0), [0]),
+        abjad.mvo(0),
     )
     b = nauert.QEventProxy(
-        nauert.PitchedQEvent(abjad.Offset(9, 20).value_offset(), [1]),
-        abjad.Offset(9, 20).value_offset(),
+        nauert.PitchedQEvent(abjad.mvo(9, 20), [1]),
+        abjad.mvo(9, 20),
     )
     c = nauert.QEventProxy(
-        nauert.PitchedQEvent(abjad.Offset(1, 2).value_offset(), [2]),
-        abjad.Offset(1, 2).value_offset(),
+        nauert.PitchedQEvent(abjad.mvo(1, 2), [2]),
+        abjad.mvo(1, 2),
     )
     d = nauert.QEventProxy(
-        nauert.PitchedQEvent(abjad.Offset(11, 20).value_offset(), [3]),
-        abjad.Offset(11, 20).value_offset(),
+        nauert.PitchedQEvent(abjad.mvo(11, 20), [3]),
+        abjad.mvo(11, 20),
     )
     e = nauert.QEventProxy(
-        nauert.PitchedQEvent(abjad.Offset(1).value_offset(), [4]),
-        abjad.Offset(1).value_offset(),
+        nauert.PitchedQEvent(abjad.mvo(1), [4]),
+        abjad.mvo(1),
     )
     q_grid.leaves[0].q_event_proxies.extend([a, b, c, d])
     q_grid.leaves[1].q_event_proxies.append(e)
