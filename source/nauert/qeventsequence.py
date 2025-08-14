@@ -183,7 +183,7 @@ class QEventSequence:
         else:
             durations = milliseconds
         sums = abjad.math.cumulative_sums([abs(_) for _ in durations])
-        offsets = [abjad.mvo(_) for _ in sums]
+        offsets = [abjad.duration.offset(_) for _ in sums]
         q_events: list[_qevents.QEvent] = []
         for offset, duration in zip(offsets, durations):
             q_event: _qevents.QEvent
@@ -204,7 +204,7 @@ class QEventSequence:
         Changes millisecond ``offsets`` to ``QEventSequence``:
 
         >>> numbers = [0, 250, 750, 1750, 3000, 4000]
-        >>> offsets = [abjad.mvo(_) for _ in numbers]
+        >>> offsets = [abjad.duration.offset(_) for _ in numbers]
         >>> sequence = nauert.QEventSequence.from_millisecond_offsets(offsets)
         >>> for q_event in sequence:
         ...     q_event
@@ -352,7 +352,7 @@ class QEventSequence:
         durations = [x for x in abjad.sequence.sum_by_sign(durations, sign=[-1]) if x]
         durations = [tempo.duration_to_milliseconds(_) for _ in durations]
         offsets = abjad.math.cumulative_sums([abs(_) for _ in durations])
-        offsets = [abjad.mvo(_) for _ in offsets]
+        offsets = [abjad.duration.offset(_) for _ in offsets]
         q_events = []
         for offset, duration in zip(offsets, durations):
             offset = abjad.Offset(offset.fraction)

@@ -28,12 +28,12 @@ def test_DiscardingGraceHandler___call___01():
     ), print(abjad.lilypond(result))
     assert len(grace_handler.discarded_q_events) == 3
     assert grace_handler.discarded_q_events[0] == (
-        nauert.PitchedQEvent(abjad.mvo(1000), [1]),
-        nauert.PitchedQEvent(abjad.mvo(1001), [2]),
+        nauert.PitchedQEvent(abjad.duration.offset(1000), [1]),
+        nauert.PitchedQEvent(abjad.duration.offset(1001), [2]),
     )
     assert grace_handler.discarded_q_events[1] == (
-        nauert.PitchedQEvent(abjad.mvo(2000), [4]),
+        nauert.PitchedQEvent(abjad.duration.offset(2000), [4]),
     )
     assert grace_handler.discarded_q_events[2] == (
-        nauert.PitchedQEvent(abjad.mvo(3000), [6]),
+        nauert.PitchedQEvent(abjad.duration.offset(3000), [6]),
     )

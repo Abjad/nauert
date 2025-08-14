@@ -10,15 +10,19 @@ def test_QEventSequence_from_millisecond_pitch_pairs_01():
     q_events = nauert.QEventSequence.from_millisecond_pitch_pairs(pairs)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.mvo(0), (abjad.NamedPitch("c'"),)),
-            nauert.SilentQEvent(abjad.mvo(100, 1)),
+            nauert.PitchedQEvent(abjad.duration.offset(0), (abjad.NamedPitch("c'"),)),
+            nauert.SilentQEvent(abjad.duration.offset(100, 1)),
             nauert.PitchedQEvent(
-                abjad.mvo(400, 1),
+                abjad.duration.offset(400, 1),
                 (abjad.NamedPitch("cs'"), abjad.NamedPitch("e'")),
             ),
-            nauert.SilentQEvent(abjad.mvo(700, 1)),
-            nauert.PitchedQEvent(abjad.mvo(1050, 1), (abjad.NamedPitch("f'"),)),
-            nauert.PitchedQEvent(abjad.mvo(1450, 1), (abjad.NamedPitch("g'"),)),
-            nauert.TerminalQEvent(abjad.mvo(2050, 1)),
+            nauert.SilentQEvent(abjad.duration.offset(700, 1)),
+            nauert.PitchedQEvent(
+                abjad.duration.offset(1050, 1), (abjad.NamedPitch("f'"),)
+            ),
+            nauert.PitchedQEvent(
+                abjad.duration.offset(1450, 1), (abjad.NamedPitch("g'"),)
+            ),
+            nauert.TerminalQEvent(abjad.duration.offset(2050, 1)),
         )
     )

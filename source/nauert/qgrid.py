@@ -174,10 +174,10 @@ class QGrid:
         ``QGrid`` closest to their virtual offset:
 
         >>> q_grid = nauert.QGrid()
-        >>> q_event_a = nauert.PitchedQEvent(abjad.mvo(250), [0])
-        >>> q_event_b = nauert.PitchedQEvent(abjad.mvo(750), [1])
-        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.mvo(0.25))
-        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.mvo(0.75))
+        >>> q_event_a = nauert.PitchedQEvent(abjad.duration.offset(250), [0])
+        >>> q_event_b = nauert.PitchedQEvent(abjad.duration.offset(750), [1])
+        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(0.25))
+        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(0.75))
         >>> q_grid.fit_q_events([proxy_a, proxy_b])
 
         >>> for q_event_proxy in q_grid.root_node.q_event_proxies:
@@ -299,10 +299,10 @@ class QGrid:
         ..  container:: example
 
             >>> q_grid = nauert.QGrid()
-            >>> q_event_a = nauert.PitchedQEvent(abjad.mvo(250), [0], ["A"])
-            >>> q_event_b = nauert.PitchedQEvent(abjad.mvo(750), [1], ["B"])
-            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.mvo(0.25))
-            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.mvo(0.75))
+            >>> q_event_a = nauert.PitchedQEvent(abjad.duration.offset(250), [0], ["A"])
+            >>> q_event_b = nauert.PitchedQEvent(abjad.duration.offset(750), [1], ["B"])
+            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(0.25))
+            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(0.75))
             >>> q_grid.fit_q_events([proxy_a, proxy_b])
             >>> print(q_grid.rtm_format())
             1
