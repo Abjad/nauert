@@ -44,8 +44,8 @@ class QEventProxy:
                 abjad.Offset(offsets[1].fraction),
             )
             assert isinstance(q_event, _qevents.QEvent)
-            assert minimum <= q_event.value_offset() <= maximum
-            fraction = (q_event.value_offset() - minimum) / (maximum - minimum)
+            assert minimum <= q_event.offset() <= maximum
+            fraction = (q_event.offset() - minimum) / (maximum - minimum)
             offset = abjad.Offset(fraction)
         elif len(offsets) == 0:
             assert q_event is None
@@ -64,7 +64,7 @@ class QEventProxy:
         equal to those of this q-event proxy. Otherwise false.
         """
         if type(self) is type(argument):
-            if self.value_offset() == argument.value_offset():
+            if self.offset() == argument.offset():
                 if self.q_event == argument.q_event:
                     return True
         return False
@@ -82,9 +82,7 @@ class QEventProxy:
         Gets repr.
         """
         class_name = type(self).__name__
-        string = (
-            f"{class_name}(q_event={self.q_event!r}, offset={self.value_offset()!r})"
-        )
+        string = f"{class_name}(q_event={self.q_event!r}, offset={self.offset()!r})"
         return string
 
     ### PUBLIC PROPERTIES ###
@@ -97,7 +95,7 @@ class QEventProxy:
         assert self._q_event is not None, "There is no QEvent is this proxy."
         return self._q_event.index
 
-    def value_offset(self) -> abjad.Offset:
+    def offset(self) -> abjad.Offset:
         """
         Gets offset of q-event proxy.
         """

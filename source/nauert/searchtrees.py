@@ -90,7 +90,7 @@ class SearchTree(abc.ABC):
                 succeeding_proxies = leaf_one.succeeding_q_event_proxies
                 preceding_proxies = leaf_two.preceding_q_event_proxies
                 if not preceding_proxies and all(
-                    proxy.value_offset == leaf_one.value_start_offset
+                    proxy.offset == leaf_one.start_offset()
                     for proxy in succeeding_proxies
                 ):
                     # proxies align perfectly with this leaf
