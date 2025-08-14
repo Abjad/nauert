@@ -436,7 +436,7 @@ class QEventSequence:
                 pitch = None
             elif isinstance(group[0], abjad.Note):
                 first_written_pitch = group[0].written_pitch()
-                assert first_written_pitch is not None
+                assert isinstance(first_written_pitch, abjad.NamedPitch)
                 pitch = first_written_pitch.number()
             # chord
             else:
