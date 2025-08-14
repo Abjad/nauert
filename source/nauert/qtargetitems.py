@@ -16,7 +16,7 @@ class QTargetItem(abc.ABC):
     """
 
     @abc.abstractproperty
-    def value_offset_in_ms(self) -> abjad.Offset:
+    def offset_in_ms(self) -> abjad.Offset:
         raise NotImplementedError
 
     @abc.abstractproperty
@@ -102,8 +102,8 @@ class QTargetBeat(QTargetItem):
         for q_event in self.q_events:
             q_event_proxy = _qeventproxy.QEventProxy(
                 q_event,
-                self.value_offset_in_ms,
-                self.value_offset_in_ms + self.duration_in_ms,
+                self.offset_in_ms,
+                self.offset_in_ms + self.duration_in_ms,
             )
             q_event_proxies.append(q_event_proxy)
         return _quantizationjob.QuantizationJob(
@@ -115,7 +115,7 @@ class QTargetBeat(QTargetItem):
         Gets repr.
         """
         string = f"{type(self).__name__}(beatspan={self.beatspan!r},"
-        string += f" offset_in_ms={self.value_offset_in_ms!r},"
+        string += f" offset_in_ms={self.offset_in_ms!r},"
         string += f" search_tree={self.search_tree!r}, tempo={self.tempo!r})"
         return string
 
@@ -168,7 +168,7 @@ class QTargetBeat(QTargetItem):
         return self.tempo.duration_to_milliseconds(self.beatspan)
 
     @property
-    def value_offset_in_ms(self) -> abjad.Offset:
+    def offset_in_ms(self) -> abjad.Offset:
         """
         Offset in milliseconds of q-target beat.
 
@@ -184,7 +184,7 @@ class QTargetBeat(QTargetItem):
         ...     tempo=tempo,
         ... )
 
-        >>> q_target_beat.value_offset_in_ms
+        >>> q_target_beat.offset_in_ms
         Offset(Fraction(1500, 1))
 
         """
@@ -287,7 +287,7 @@ class QTargetMeasure(QTargetItem):
         ``QTargetMeasures`` group ``QTargetBeats``:
 
         >>> for q_target_beat in q_target_measure.beats:
-        ...     print(q_target_beat.value_offset_in_ms, q_target_beat.duration_in_ms)
+        ...     print(q_target_beat.offset_in_ms, q_target_beat.duration_in_ms)
         1000 1000
         2000 1000
         3000 1000
@@ -307,7 +307,7 @@ class QTargetMeasure(QTargetItem):
         ... )
 
         >>> for q_target_beat in another_q_target_measure.beats:
-        ...     print(q_target_beat.value_offset_in_ms, q_target_beat.duration_in_ms)
+        ...     print(q_target_beat.offset_in_ms, q_target_beat.duration_in_ms)
         1000 4000
 
     Not composer-safe.
@@ -381,7 +381,7 @@ class QTargetMeasure(QTargetItem):
         """
         Gets repr.
         """
-        string = f"{type(self).__name__}(offset_in_ms={self.value_offset_in_ms!r},"
+        string = f"{type(self).__name__}(offset_in_ms={self.offset_in_ms!r},"
         string += f" search_tree={self.search_tree!r}, tempo={self.tempo!r},"
         string += f" use_full_measure={self.use_full_measure!r})"
         return string
@@ -407,7 +407,7 @@ class QTargetMeasure(QTargetItem):
             ... )
 
             >>> for q_target_beat in q_target_measure.beats:
-            ...     q_target_beat.value_offset_in_ms
+            ...     q_target_beat.offset_in_ms
             ...
             Offset(Fraction(1000, 1))
             Offset(Fraction(2000, 1))
@@ -442,7 +442,7 @@ class QTargetMeasure(QTargetItem):
         return self.tempo.duration_to_milliseconds(self.time_signature.duration())
 
     @property
-    def value_offset_in_ms(self) -> abjad.Offset:
+    def offset_in_ms(self) -> abjad.Offset:
         """
         Gets offset in milliseconds of the ``QTargetMeasure``:
 
@@ -459,7 +459,7 @@ class QTargetMeasure(QTargetItem):
             ...     time_signature=time_signature,
             ... )
 
-            >>> q_target_measure.value_offset_in_ms
+            >>> q_target_measure.offset_in_ms
             Offset(Fraction(1000, 1))
 
         """
