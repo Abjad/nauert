@@ -6,32 +6,32 @@ import nauert
 def test_QGrid_fit_q_events_01():
     q_grid = nauert.QGrid()
     a = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(0), ["A"]),
-        abjad.mvo(0),
+        nauert.SilentQEvent(abjad.duration.offset(0), ["A"]),
+        abjad.duration.offset(0),
     )
     b = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 20), ["B"]),
-        abjad.mvo(1, 20),
+        nauert.SilentQEvent(abjad.duration.offset(1, 20), ["B"]),
+        abjad.duration.offset(1, 20),
     )
     c = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(9, 20), ["C"]),
-        abjad.mvo(9, 20),
+        nauert.SilentQEvent(abjad.duration.offset(9, 20), ["C"]),
+        abjad.duration.offset(9, 20),
     )
     d = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 2), ["D"]),
-        abjad.mvo(1, 2),
+        nauert.SilentQEvent(abjad.duration.offset(1, 2), ["D"]),
+        abjad.duration.offset(1, 2),
     )
     e = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(11, 20), ["E"]),
-        abjad.mvo(11, 20),
+        nauert.SilentQEvent(abjad.duration.offset(11, 20), ["E"]),
+        abjad.duration.offset(11, 20),
     )
     f = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(19, 20), ["F"]),
-        abjad.mvo(19, 20),
+        nauert.SilentQEvent(abjad.duration.offset(19, 20), ["F"]),
+        abjad.duration.offset(19, 20),
     )
     g = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1), ["G"]),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1), ["G"]),
+        abjad.duration.offset(1),
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g])
     assert q_grid.leaves[0].q_event_proxies == [a, b, c, d]

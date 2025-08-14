@@ -10,59 +10,59 @@ def test_UnweightedSearchTree__generate_all_subdivision_commands_01():
     search_tree = nauert.UnweightedSearchTree(definition)
     q_grid = nauert.QGrid()
     a = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(0), ["A"], index=1),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(0), ["A"], index=1),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     b = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 5), ["B"], index=2),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1, 5), ["B"], index=2),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     c = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 4), ["C"], index=3),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1, 4), ["C"], index=3),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     d = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 3), ["D"], index=4),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1, 3), ["D"], index=4),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     e = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(2, 5), ["E"], index=5),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(2, 5), ["E"], index=5),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     f = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1, 2), ["F"], index=6),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1, 2), ["F"], index=6),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     g = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(3, 5), ["G"], index=7),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(3, 5), ["G"], index=7),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     h = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(2, 3), ["H"], index=8),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(2, 3), ["H"], index=8),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     i = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(3, 4), ["I"], index=9),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(3, 4), ["I"], index=9),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     j = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(4, 5), ["J"], index=10),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(4, 5), ["J"], index=10),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     k = nauert.QEventProxy(
-        nauert.SilentQEvent(abjad.mvo(1), ["K"], index=11),
-        abjad.mvo(0),
-        abjad.mvo(1),
+        nauert.SilentQEvent(abjad.duration.offset(1), ["K"], index=11),
+        abjad.duration.offset(0),
+        abjad.duration.offset(1),
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g, h, i, j, k])
     commands = search_tree._generate_all_subdivision_commands(q_grid)

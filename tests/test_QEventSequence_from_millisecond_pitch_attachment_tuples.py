@@ -11,24 +11,26 @@ def test_QEventSequence_from_millisecond_pitch_attachment_tuples_01():
     q_events = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(tuples)
     assert q_events == nauert.QEventSequence(
         (
-            nauert.PitchedQEvent(abjad.mvo(0), (abjad.NamedPitch("c'"),), ("foo",)),
-            nauert.SilentQEvent(abjad.mvo(100, 1)),
             nauert.PitchedQEvent(
-                abjad.mvo(400, 1),
+                abjad.duration.offset(0), (abjad.NamedPitch("c'"),), ("foo",)
+            ),
+            nauert.SilentQEvent(abjad.duration.offset(100, 1)),
+            nauert.PitchedQEvent(
+                abjad.duration.offset(400, 1),
                 (abjad.NamedPitch("cs'"), abjad.NamedPitch("e'")),
                 (6,),
             ),
-            nauert.SilentQEvent(abjad.mvo(700, 1)),
+            nauert.SilentQEvent(abjad.duration.offset(700, 1)),
             nauert.PitchedQEvent(
-                abjad.mvo(1050, 1),
+                abjad.duration.offset(1050, 1),
                 (abjad.NamedPitch("f'"),),
                 ("foobar",),
             ),
             nauert.PitchedQEvent(
-                abjad.mvo(1450, 1),
+                abjad.duration.offset(1450, 1),
                 (abjad.NamedPitch("g'"),),
                 ("foo", "bar"),
             ),
-            nauert.TerminalQEvent(abjad.mvo(2050, 1)),
+            nauert.TerminalQEvent(abjad.duration.offset(2050, 1)),
         )
     ), repr(q_events)

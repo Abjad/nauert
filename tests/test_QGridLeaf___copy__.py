@@ -14,10 +14,10 @@ def test_QGridLeaf___copy___01():
 
 
 def test_QGridLeaf___copy___02():
-    sqe = nauert.SilentQEvent(abjad.mvo(1000))
+    sqe = nauert.SilentQEvent(abjad.duration.offset(1000))
     leaf = nauert.QGridLeaf(
         abjad.Duration(2),
-        [nauert.QEventProxy(sqe, abjad.mvo(0.5))],
+        [nauert.QEventProxy(sqe, abjad.duration.offset(0.5))],
     )
     copied = copy.deepcopy(leaf)
     assert format(leaf) == format(copied)

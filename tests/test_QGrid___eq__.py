@@ -19,8 +19,8 @@ def test_QGrid___eq___02():
                     preprolated_duration=abjad.Duration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
-                            nauert.SilentQEvent(abjad.mvo(100)),
-                            abjad.mvo(0.5),
+                            nauert.SilentQEvent(abjad.duration.offset(100)),
+                            abjad.duration.offset(0.5),
                         )
                     ],
                 )
@@ -30,8 +30,8 @@ def test_QGrid___eq___02():
             preprolated_duration=abjad.Duration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
-                    nauert.TerminalQEvent(abjad.mvo(200)),
-                    abjad.mvo(0.9),
+                    nauert.TerminalQEvent(abjad.duration.offset(200)),
+                    abjad.duration.offset(0.9),
                 )
             ],
         ),
@@ -44,8 +44,8 @@ def test_QGrid___eq___02():
                     preprolated_duration=abjad.Duration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
-                            nauert.SilentQEvent(abjad.mvo(100)),
-                            abjad.mvo(0.5),
+                            nauert.SilentQEvent(abjad.duration.offset(100)),
+                            abjad.duration.offset(0.5),
                         )
                     ],
                 )
@@ -55,8 +55,8 @@ def test_QGrid___eq___02():
             preprolated_duration=abjad.Duration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
-                    nauert.TerminalQEvent(abjad.mvo(200)),
-                    abjad.mvo(0.9),
+                    nauert.TerminalQEvent(abjad.duration.offset(200)),
+                    abjad.duration.offset(0.9),
                 )
             ],
         ),
@@ -75,8 +75,8 @@ def test_QGrid___eq___03():
                     preprolated_duration=abjad.Duration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
-                            nauert.SilentQEvent(abjad.mvo(100)),
-                            abjad.mvo(0.5),
+                            nauert.SilentQEvent(abjad.duration.offset(100)),
+                            abjad.duration.offset(0.5),
                         )
                     ],
                 )
@@ -88,8 +88,8 @@ def test_QGrid___eq___03():
             preprolated_duration=abjad.Duration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
-                    nauert.TerminalQEvent(abjad.mvo(200)),
-                    abjad.mvo(0.9),
+                    nauert.TerminalQEvent(abjad.duration.offset(200)),
+                    abjad.duration.offset(0.9),
                 )
             ],
         )
@@ -103,8 +103,8 @@ def test_QGrid___eq___03():
                         preprolated_duration=abjad.Duration(1, 1),
                         q_event_proxies=[
                             nauert.QEventProxy(
-                                nauert.SilentQEvent(abjad.mvo(100)),
-                                abjad.mvo(0.5),
+                                nauert.SilentQEvent(abjad.duration.offset(100)),
+                                abjad.duration.offset(0.5),
                             )
                         ],
                     )
@@ -114,8 +114,8 @@ def test_QGrid___eq___03():
                 preprolated_duration=abjad.Duration(1, 1),
                 q_event_proxies=[
                     nauert.QEventProxy(
-                        nauert.TerminalQEvent(abjad.mvo(200)),
-                        abjad.mvo(0.9),
+                        nauert.TerminalQEvent(abjad.duration.offset(200)),
+                        abjad.duration.offset(0.9),
                     )
                 ],
             ),
