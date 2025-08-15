@@ -4,18 +4,7 @@ import nauert
 
 
 def test_QEventSequence_from_tempo_scaled_leaves_01():
-    staff = abjad.Staff([])
-    staff.append(abjad.Note(0, (1, 4)))
-    staff.append(abjad.Rest((1, 4)))
-    staff.append(abjad.Rest((1, 8)))
-    staff.append(abjad.Note(1, (1, 8)))
-    staff.append(abjad.Note(1, (1, 8)))
-    staff.append(abjad.Note(2, (1, 8)))
-    staff.append(abjad.Note(2, (1, 8)))
-    staff.append(abjad.Note(3, (1, 8)))
-    staff.append(abjad.Skip((1, 4)))
-    staff.append(abjad.Rest((1, 4)))
-    staff.append(abjad.Note(3, (1, 8)))
+    staff = abjad.Staff("c'4 r4 r8 cs'8 cs'8 d'8 d'8 ef'8 s4 r4 ef'8")
     staff.append(abjad.Chord([0, 1, 4], (1, 4)))
     abjad.tie(staff[3:5])
     abjad.tie(staff[5:7])
@@ -55,18 +44,7 @@ def test_QEventSequence_from_tempo_scaled_leaves_01():
 
 
 def test_QEventSequence_from_tempo_scaled_leaves_02():
-    staff = abjad.Staff([])
-    staff.append(abjad.Note(0, (1, 4)))
-    staff.append(abjad.Rest((1, 4)))
-    staff.append(abjad.Rest((1, 8)))
-    staff.append(abjad.Note(1, (1, 8)))
-    staff.append(abjad.Note(1, (1, 8)))
-    staff.append(abjad.Note(2, (1, 8)))
-    staff.append(abjad.Note(2, (1, 8)))
-    staff.append(abjad.Note(3, (1, 8)))
-    staff.append(abjad.Skip((1, 4)))
-    staff.append(abjad.Rest((1, 4)))
-    staff.append(abjad.Note(3, (1, 8)))
+    staff = abjad.Staff("c'4 r4 r8 cs'8 cs'8 d'8 d'8 ef'8 s4 r4 ef'8")
     staff.append(abjad.Chord([0, 1, 4], (1, 4)))
     abjad.tie(staff[3:5])
     abjad.tie(staff[5:7])
