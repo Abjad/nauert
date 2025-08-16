@@ -329,11 +329,13 @@ class ConcatenatingGraceHandler(GraceHandler):
                 leaf: abjad.Leaf
                 if isinstance(q_event, _qevents.PitchedQEvent):
                     if len(q_event.pitches) == 1:
-                        leaf = abjad.Note(q_event.pitches[0], self.grace_duration)
+                        leaf = abjad.Note.from_pitch_and_duration(
+                            q_event.pitches[0], self.grace_duration
+                        )
                     else:
                         leaf = abjad.Chord(q_event.pitches, self.grace_duration)
                 else:
-                    leaf = abjad.Rest(self.grace_duration)
+                    leaf = abjad.Rest.from_duration(self.grace_duration)
                 q_event_attachments = (
                     None if not hasattr(q_event, "attachments") else q_event.attachments
                 )
@@ -419,7 +421,9 @@ class ConcatenatingGraceHandler(GraceHandler):
             q_event = proxy.q_event
             if isinstance(q_event, _qevents.PitchedQEvent):
                 if len(q_event.pitches) == 1:
-                    leaf = abjad.Note(q_event.pitches[0], self.grace_duration)
+                    leaf = abjad.Note.from_pitch_and_duration(
+                        q_event.pitches[0], self.grace_duration
+                    )
                 else:
                     leaf = abjad.Chord(q_event.pitches, self.grace_duration)
                 abjad.annotate(leaf, "q_event_attachments", q_event.attachments)

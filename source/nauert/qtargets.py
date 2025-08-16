@@ -136,18 +136,21 @@ class QTarget(abc.ABC):
         voice: abjad.Voice | None = None,
     ):
         for leaf in abjad.iterate.leaves(voice):
-            if leaf._has_indicator(dict):
+            if abjad.get.has_indicator(leaf, dict):
                 annotation = abjad.get.indicator(leaf, dict)
                 q_events = annotation["q_events"]
                 pitches, attachments, grace_container = grace_handler(q_events)
                 new_leaf: abjad.Leaf
+                written_duration = leaf.written_duration()
                 if not pitches:
-                    new_leaf = abjad.Rest(leaf)
+                    new_leaf = abjad.Rest.from_duration(written_duration)
                 elif 1 < len(pitches):
-                    new_leaf = abjad.Chord(leaf)
+                    new_leaf = abjad.Chord([abjad.NamedPitch("c'")], written_duration)
                     new_leaf.set_written_pitches(pitches)
                 else:
-                    new_leaf = abjad.Note(leaf)
+                    new_leaf = abjad.Note.from_pitch_and_duration(
+                        abjad.NamedPitch("c'"), written_duration
+                    )
                     new_leaf.set_written_pitch(pitches[0])
                 if attachments is not None:
                     abjad.annotate(new_leaf, "q_event_attachments", attachments)
@@ -161,10 +164,14 @@ class QTarget(abc.ABC):
             else:
                 previous_leaf = abjad._iterlib._get_leaf(leaf, -1)
                 if isinstance(previous_leaf, abjad.Rest):
-                    new_leaf = type(previous_leaf)(leaf.written_duration())
+                    new_leaf = type(previous_leaf).from_duration(
+                        leaf.written_duration()
+                    )
                 elif isinstance(previous_leaf, abjad.Note):
-                    new_leaf = type(previous_leaf)(
-                        previous_leaf.written_pitch(), leaf.written_duration()
+                    previous_written_pitch = previous_leaf.written_pitch()
+                    assert isinstance(previous_written_pitch, abjad.NamedPitch)
+                    new_leaf = type(previous_leaf).from_pitch_and_duration(
+                        previous_written_pitch, leaf.written_duration()
                     )
                 else:
                     new_leaf = type(previous_leaf)(
