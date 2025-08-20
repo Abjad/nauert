@@ -5,7 +5,7 @@ import nauert
 
 def test_QEventSequence_from_tempo_scaled_leaves_01():
     staff = abjad.Staff("c'4 r4 r8 cs'8 cs'8 d'8 d'8 ef'8 s4 r4 ef'8")
-    staff.append(abjad.Chord([0, 1, 4], (1, 4)))
+    staff.append("<c' cs' e'>4")
     abjad.tie(staff[3:5])
     abjad.tie(staff[5:7])
     tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 55)
@@ -45,7 +45,7 @@ def test_QEventSequence_from_tempo_scaled_leaves_01():
 
 def test_QEventSequence_from_tempo_scaled_leaves_02():
     staff = abjad.Staff("c'4 r4 r8 cs'8 cs'8 d'8 d'8 ef'8 s4 r4 ef'8")
-    staff.append(abjad.Chord([0, 1, 4], (1, 4)))
+    staff.append("<c' cs' e'>4")
     abjad.tie(staff[3:5])
     abjad.tie(staff[5:7])
     tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 58)

@@ -145,7 +145,10 @@ class QTarget(abc.ABC):
                 if not pitches:
                     new_leaf = abjad.Rest.from_duration(written_duration)
                 elif 1 < len(pitches):
-                    new_leaf = abjad.Chord([abjad.NamedPitch("c'")], written_duration)
+                    new_leaf = abjad.Chord.from_pitches_and_duration(
+                        [abjad.NamedPitch("c'")],
+                        written_duration,
+                    )
                     new_leaf.set_written_pitches(pitches)
                 else:
                     new_leaf = abjad.Note.from_pitch_and_duration(
@@ -171,11 +174,14 @@ class QTarget(abc.ABC):
                     previous_written_pitch = previous_leaf.written_pitch()
                     assert isinstance(previous_written_pitch, abjad.NamedPitch)
                     new_leaf = type(previous_leaf).from_pitch_and_duration(
-                        previous_written_pitch, leaf.written_duration()
+                        previous_written_pitch,
+                        leaf.written_duration(),
                     )
                 else:
-                    new_leaf = type(previous_leaf)(
-                        previous_leaf.written_pitches(), leaf.written_duration()
+                    assert isinstance(previous_leaf, abjad.Chord)
+                    new_leaf = type(previous_leaf).from_pitches_and_duration(
+                        previous_leaf.written_pitches(),
+                        leaf.written_duration(),
                     )
                 abjad.mutate.replace(leaf, new_leaf)
                 if abjad.get.annotation(previous_leaf, "tie_to_next") is True:
