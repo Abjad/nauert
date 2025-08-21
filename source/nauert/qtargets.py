@@ -188,12 +188,12 @@ class QTarget(abc.ABC):
                     leaves = [previous_leaf, new_leaf]
                     abjad.tie(leaves)
                     abjad.annotate(new_leaf, "tie_to_next", True)
-            if leaf._has_indicator(abjad.MetronomeMark):
+            if abjad.get.has_indicator(leaf, abjad.MetronomeMark):
                 tempo = abjad.get.indicator(leaf, abjad.MetronomeMark)
                 abjad.detach(abjad.MetronomeMark, leaf)
                 abjad.detach(abjad.MetronomeMark, new_leaf)
                 abjad.attach(tempo, new_leaf)
-            if leaf._has_indicator(abjad.TimeSignature):
+            if abjad.get.has_indicator(leaf, abjad.TimeSignature):
                 time_signature = abjad.get.indicator(leaf, abjad.TimeSignature)
                 abjad.detach(abjad.TimeSignature, leaf)
                 abjad.detach(abjad.TimeSignature, new_leaf)
