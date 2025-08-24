@@ -145,14 +145,15 @@ class QTarget(abc.ABC):
                 if not pitches:
                     new_leaf = abjad.Rest.from_duration(written_duration)
                 elif 1 < len(pitches):
-                    new_leaf = abjad.Chord.from_pitches_and_duration(
-                        [abjad.NamedPitch("c'")],
+                    new_leaf = abjad.Chord.from_duration_and_pitches(
                         written_duration,
+                        [abjad.NamedPitch("c'")],
                     )
                     new_leaf.set_written_pitches(pitches)
                 else:
-                    new_leaf = abjad.Note.from_pitch_and_duration(
-                        abjad.NamedPitch("c'"), written_duration
+                    new_leaf = abjad.Note.from_duration_and_pitch(
+                        written_duration,
+                        abjad.NamedPitch("c'"),
                     )
                     new_leaf.set_written_pitch(pitches[0])
                 if attachments is not None:
@@ -173,15 +174,15 @@ class QTarget(abc.ABC):
                 elif isinstance(previous_leaf, abjad.Note):
                     previous_written_pitch = previous_leaf.written_pitch()
                     assert isinstance(previous_written_pitch, abjad.NamedPitch)
-                    new_leaf = type(previous_leaf).from_pitch_and_duration(
-                        previous_written_pitch,
+                    new_leaf = type(previous_leaf).from_duration_and_pitch(
                         leaf.written_duration(),
+                        previous_written_pitch,
                     )
                 else:
                     assert isinstance(previous_leaf, abjad.Chord)
-                    new_leaf = type(previous_leaf).from_pitches_and_duration(
-                        previous_leaf.written_pitches(),
+                    new_leaf = type(previous_leaf).from_duration_and_pitches(
                         leaf.written_duration(),
+                        previous_leaf.written_pitches(),
                     )
                 abjad.mutate.replace(leaf, new_leaf)
                 if abjad.get.annotation(previous_leaf, "tie_to_next") is True:
