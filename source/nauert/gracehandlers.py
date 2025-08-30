@@ -328,16 +328,13 @@ class ConcatenatingGraceHandler(GraceHandler):
             for q_event in grace_events:
                 leaf: abjad.Leaf
                 if isinstance(q_event, _qevents.PitchedQEvent):
+                    duration = self.grace_duration
                     if len(q_event.pitches) == 1:
-                        leaf = abjad.Note.from_duration_and_pitch(
-                            self.grace_duration,
-                            q_event.pitches[0],
-                        )
+                        pitch = q_event.pitches[0]
+                        leaf = abjad.Note.from_duration_and_pitch(duration, pitch)
                     else:
-                        leaf = abjad.Chord.from_duration_and_pitches(
-                            self.grace_duration,
-                            q_event.pitches,
-                        )
+                        pitches = q_event.pitches
+                        leaf = abjad.Chord.from_duration_and_pitches(duration, pitches)
                 else:
                     leaf = abjad.Rest.from_duration(self.grace_duration)
                 q_event_attachments = (
@@ -421,16 +418,16 @@ class ConcatenatingGraceHandler(GraceHandler):
 
         """
         grace_container = abjad.AfterGraceContainer() if q_event_proxies else None
+        duration = self.grace_duration
         for proxy in q_event_proxies:
             q_event = proxy.q_event
             if isinstance(q_event, _qevents.PitchedQEvent):
                 if len(q_event.pitches) == 1:
-                    leaf = abjad.Note.from_duration_and_pitch(
-                        self.grace_duration,
-                        q_event.pitches[0],
-                    )
+                    pitch = q_event.pitches[0]
+                    leaf = abjad.Note.from_duration_and_pitch(duration, pitch)
                 else:
-                    leaf = abjad.Chord(q_event.pitches, self.grace_duration)
+                    pitches = q_event.pitches
+                    leaf = abjad.Chord.from_duration_and_pitches(duration, pitches)
                 abjad.annotate(leaf, "q_event_attachments", q_event.attachments)
                 assert grace_container is not None
                 grace_container.append(leaf)

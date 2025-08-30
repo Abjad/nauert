@@ -136,26 +136,19 @@ class QTarget(abc.ABC):
         voice: abjad.Voice | None = None,
     ):
         for leaf in abjad.iterate.leaves(voice):
+            duration = leaf.written_duration()
             if abjad.get.has_indicator(leaf, dict):
                 annotation = abjad.get.indicator(leaf, dict)
                 q_events = annotation["q_events"]
                 pitches, attachments, grace_container = grace_handler(q_events)
                 new_leaf: abjad.Leaf
-                written_duration = leaf.written_duration()
                 if not pitches:
-                    new_leaf = abjad.Rest.from_duration(written_duration)
+                    new_leaf = abjad.Rest.from_duration(duration)
                 elif 1 < len(pitches):
-                    new_leaf = abjad.Chord.from_duration_and_pitches(
-                        written_duration,
-                        [abjad.NamedPitch("c'")],
-                    )
-                    new_leaf.set_written_pitches(pitches)
+                    new_leaf = abjad.Chord.from_duration_and_pitches(duration, pitches)
                 else:
-                    new_leaf = abjad.Note.from_duration_and_pitch(
-                        written_duration,
-                        abjad.NamedPitch("c'"),
-                    )
-                    new_leaf.set_written_pitch(pitches[0])
+                    pitch = pitches[0]
+                    new_leaf = abjad.Note.from_duration_and_pitch(duration, pitch)
                 if attachments is not None:
                     abjad.annotate(new_leaf, "q_event_attachments", attachments)
                 if grace_container:
@@ -168,22 +161,14 @@ class QTarget(abc.ABC):
             else:
                 previous_leaf = abjad._iterlib._get_leaf(leaf, -1)
                 if isinstance(previous_leaf, abjad.Rest):
-                    new_leaf = type(previous_leaf).from_duration(
-                        leaf.written_duration()
-                    )
+                    new_leaf = type(previous_leaf).from_duration(duration)
                 elif isinstance(previous_leaf, abjad.Note):
-                    previous_written_pitch = previous_leaf.written_pitch()
-                    assert isinstance(previous_written_pitch, abjad.NamedPitch)
-                    new_leaf = type(previous_leaf).from_duration_and_pitch(
-                        leaf.written_duration(),
-                        previous_written_pitch,
-                    )
+                    pitch_ = previous_leaf.written_pitch()
+                    new_leaf = abjad.Note.from_duration_and_pitch(duration, pitch_)
                 else:
                     assert isinstance(previous_leaf, abjad.Chord)
-                    new_leaf = type(previous_leaf).from_duration_and_pitches(
-                        leaf.written_duration(),
-                        previous_leaf.written_pitches(),
-                    )
+                    pitches = previous_leaf.written_pitches()
+                    new_leaf = abjad.Chord.from_duration_and_pitches(duration, pitches)
                 abjad.mutate.replace(leaf, new_leaf)
                 if abjad.get.annotation(previous_leaf, "tie_to_next") is True:
                     leaves = [previous_leaf, new_leaf]
