@@ -349,7 +349,7 @@ class QGrid:
         """
         count = 0
         absolute_distance = abjad.Duration(0)
-        for leaf, offset in zip(self.leaves, self.offsets):
+        for leaf, offset in zip(self.leaves, self.offsets, strict=True):
             for q_event_proxy in leaf.q_event_proxies:
                 absolute_distance += abs(q_event_proxy.offset() - offset)
                 count += 1

@@ -8,7 +8,7 @@ def test_CollapsingGraceHandler___call___01():
     durations = [1000, 1, 1, 997]
     pitches = [0, 7, 4, 0]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     result = nauert.quantize(q_event_sequence, grace_handler=grace_handler)
     assert abjad.lilypond(result) == abjad.string.normalize(
@@ -33,7 +33,7 @@ def test_CollapsingGraceHandler___call___02():
     durations = [1000, 1, 1, 1, 997]
     pitches = [0, 7, None, 4, 0]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     result = nauert.quantize(q_event_sequence, grace_handler=grace_handler)
     assert abjad.lilypond(result) == abjad.string.normalize(
@@ -58,7 +58,7 @@ def test_CollapsingGraceHandler___call___03():
     durations = [1000, 1, 1, 1, 997]
     pitches = [0, None, 7, 4, 0]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     result = nauert.quantize(q_event_sequence, grace_handler=grace_handler)
     assert abjad.lilypond(result) == abjad.string.normalize(
@@ -83,7 +83,7 @@ def test_CollapsingGraceHandler___call___04():
     durations = [1000, 1, 1, 1, 997]
     pitches = [0, 4, 7, None, 0]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     result = nauert.quantize(q_event_sequence, grace_handler=grace_handler)
     assert abjad.lilypond(result) == abjad.string.normalize(

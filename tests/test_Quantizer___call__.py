@@ -5,7 +5,7 @@ import nauert
 
 def assert_q_event_attachments(result, all_attachments):
     for logical_tie, attachments in zip(
-        abjad.iterate.logical_ties(result, pitched=True), all_attachments
+        abjad.iterate.logical_ties(result, pitched=True), all_attachments, strict=True
     ):
         first_leaf = abjad.get.leaf(logical_tie, 0)
         q_event_attachments = abjad.get.annotation(first_leaf, "q_event_attachments")
@@ -422,7 +422,7 @@ def test_Quantize_10():
     all_attachments = [(x,) for x in pitches]
     pitches = [(x, x + 7) for x in pitches]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(
-        tuple(zip(durations, pitches, all_attachments))
+        tuple(zip(durations, pitches, all_attachments, strict=True))
     )
     grace_handler = nauert.ConcatenatingGraceHandler(
         replace_rest_with_final_grace_note=True
@@ -461,7 +461,7 @@ def test_Quantize_11():
     all_attachments = [(x,) for x in pitches]
     pitches = [(x, x + 7) for x in pitches]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(
-        tuple(zip(durations, pitches, all_attachments))
+        tuple(zip(durations, pitches, all_attachments, strict=True))
     )
     time_signature = abjad.TimeSignature((7, 8))
     search_tree = nauert.UnweightedSearchTree(
@@ -524,7 +524,7 @@ def test_Quantize_12():
     pitches = range(len(durations))
     all_attachments = [(x,) for x in pitches]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(
-        tuple(zip(durations, pitches, all_attachments))
+        tuple(zip(durations, pitches, all_attachments, strict=True))
     )
     q_schema = nauert.MeasurewiseQSchema(
         search_tree=search_tree, time_signature=(7, 8), use_full_measure=True
@@ -582,7 +582,7 @@ def test_Quantize_13():
     durations = [400, 1000, 1260, 840, 20, 610, 420, 2450, 3500]
     pitches = range(len(durations))
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     q_schema = nauert.MeasurewiseQSchema(
         search_tree=search_tree, time_signature=(7, 8), use_full_measure=True
@@ -644,7 +644,7 @@ def test_Quantize_14():
     durations = [1000, 1000, 1000, 400, 50, 50, 3500]
     pitches = range(len(durations))
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     q_schema = nauert.MeasurewiseQSchema(
         search_tree=search_tree, time_signature=(7, 8), use_full_measure=True
@@ -695,7 +695,7 @@ def test_Quantize_15():
     pitches = range(len(durations))
 
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     search_tree = nauert.UnweightedSearchTree()
     attack_point_optimizer = nauert.MeasurewiseAttackPointOptimizer()
@@ -749,7 +749,7 @@ def test_Quantize_16():
     all_attachments = [(x,) for x in pitches]
     all_attachments[0] = ()
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(
-        tuple(zip(durations, pitches, all_attachments))
+        tuple(zip(durations, pitches, all_attachments, strict=True))
     )
     definition = {"divisors": (2, 3, 5, 7), "max_depth": 2, "max_divisions": 2}
     search_tree = nauert.WeightedSearchTree(definition=definition)

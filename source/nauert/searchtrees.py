@@ -120,7 +120,7 @@ class SearchTree(abc.ABC):
             return ()
         combinations = abjad.enumerate.outer_product(subdivisions)
         combinations = [tuple(_) for _ in combinations]
-        return tuple(tuple(zip(indices, combo)) for combo in combinations)
+        return tuple(tuple(zip(indices, combo, strict=True)) for combo in combinations)
 
     @abc.abstractmethod
     def _is_valid_definition(self, definition: dict) -> bool:

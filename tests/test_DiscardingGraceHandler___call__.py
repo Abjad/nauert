@@ -8,7 +8,7 @@ def test_DiscardingGraceHandler___call___01():
     durations = [1000, 1, 1, 998, 1, 999, 1, 999]
     pitches = [0, 1, 2, 3, 4, 5, 6, None]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(
-        tuple(zip(durations, pitches))
+        tuple(zip(durations, pitches, strict=True))
     )
     result = nauert.quantize(q_event_sequence, grace_handler=grace_handler)
     assert abjad.lilypond(result) == abjad.string.normalize(

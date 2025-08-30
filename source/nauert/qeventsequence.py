@@ -234,7 +234,7 @@ class QEventSequence:
         >>> durations = [250, 500, 1000, 1250, 1000]
         >>> pitches = [(0,), None, (2, 3), None, (1,)]
         >>> attachments = [("foo",), (), (), (), ("foobar", "foo")]
-        >>> tuples = tuple(zip(durations, pitches, attachments))
+        >>> tuples = tuple(zip(durations, pitches, attachments, strict=True))
         >>> method = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples
         >>> sequence = method(tuples)
         >>> for q_event in sequence:
@@ -294,7 +294,7 @@ class QEventSequence:
 
         >>> durations = [250, 500, 1000, 1250, 1000]
         >>> pitches = [(0,), None, (2, 3), None, (1,)]
-        >>> pairs = tuple(zip(durations, pitches))
+        >>> pairs = tuple(zip(durations, pitches, strict=True))
         >>> sequence = nauert.QEventSequence.from_millisecond_pitch_pairs(pairs)
         >>> for q_event in sequence:
         ...     q_event
