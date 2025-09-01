@@ -410,7 +410,7 @@ class QEventSequence:
                 groups.append(list(rgroup))
             else:
                 for tvalue, tgroup in itertools.groupby(
-                    rgroup, lambda x: abjad._iterlib._get_logical_tie_leaves(x)
+                    rgroup, lambda x: abjad._iterlib.get_logical_tie_leaves(x)
                 ):
                     groups.append(list(tgroup))
         # calculate lists of pitches and durations
