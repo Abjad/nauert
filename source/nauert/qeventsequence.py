@@ -274,7 +274,7 @@ class QEventSequence:
         # find offsets
         offsets = abjad.math.cumulative_sums([abs(_[0]) for _ in groups])
         durations = [abjad.Duration(_) for _ in offsets]
-        offsets = [abjad.Offset(_.fraction()) for _ in durations]
+        offsets = [abjad.Offset(_.as_fraction()) for _ in durations]
         # build QEvents
         q_events = [
             _qevents.QEvent.from_offset_pitches_attachments(
