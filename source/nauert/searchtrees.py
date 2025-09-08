@@ -183,8 +183,8 @@ class UnweightedSearchTree(SearchTree):
 
         >>> q_event_a = nauert.PitchedQEvent(abjad.duration.offset(130), [0, 1, 4])
         >>> q_event_b = nauert.PitchedQEvent(abjad.duration.offset(150), [2, 3, 5])
-        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(0.5))
-        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(0.667))
+        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(1, 2))
+        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(2, 3))
         >>> q_grid = nauert.QGrid()
         >>> q_grid.fit_q_events([proxy_a, proxy_b])
         >>> q_grids = search_tree(q_grid)

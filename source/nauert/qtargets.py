@@ -213,12 +213,12 @@ class QTarget(abc.ABC):
         raise NotImplementedError
 
     @property
-    def duration_in_ms(self) -> abjad.Duration:
+    def duration_in_ms(self) -> abjad.ValueDuration:
         """
         Gets duration of q-target in milliseconds.
         """
         last_item = self._items[-1]
-        return last_item.offset_in_ms.fraction + last_item.duration_in_ms
+        return last_item.offset_in_ms.duration() + last_item.duration_in_ms
 
     @abc.abstractproperty
     def item_class(self):

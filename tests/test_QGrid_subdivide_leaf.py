@@ -34,10 +34,10 @@ def test_QGrid_subdivide_leaf_01():
         (1, 1),
         children=[
             nauert.QGridLeaf(
-                preprolated_duration=abjad.Duration(2, 1), q_event_proxies=[]
+                preprolated_duration=abjad.ValueDuration(2, 1), q_event_proxies=[]
             ),
             nauert.QGridLeaf(
-                preprolated_duration=abjad.Duration(3, 1), q_event_proxies=[]
+                preprolated_duration=abjad.ValueDuration(3, 1), q_event_proxies=[]
             ),
         ],
     )

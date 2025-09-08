@@ -16,22 +16,22 @@ def test_QGrid___eq___02():
             (1, 1),
             children=[
                 nauert.QGridLeaf(
-                    preprolated_duration=abjad.Duration(1, 1),
+                    preprolated_duration=abjad.ValueDuration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
                             nauert.SilentQEvent(abjad.duration.offset(100)),
-                            abjad.duration.offset(0.5),
+                            abjad.duration.offset(1, 2),
                         )
                     ],
                 )
             ],
         ),
         next_downbeat=nauert.QGridLeaf(
-            preprolated_duration=abjad.Duration(1, 1),
+            preprolated_duration=abjad.ValueDuration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
                     nauert.TerminalQEvent(abjad.duration.offset(200)),
-                    abjad.duration.offset(0.9),
+                    abjad.duration.offset(9, 10),
                 )
             ],
         ),
@@ -41,22 +41,22 @@ def test_QGrid___eq___02():
             (1, 1),
             children=[
                 nauert.QGridLeaf(
-                    preprolated_duration=abjad.Duration(1, 1),
+                    preprolated_duration=abjad.ValueDuration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
                             nauert.SilentQEvent(abjad.duration.offset(100)),
-                            abjad.duration.offset(0.5),
+                            abjad.duration.offset(1, 2),
                         )
                     ],
                 )
             ],
         ),
         next_downbeat=nauert.QGridLeaf(
-            preprolated_duration=abjad.Duration(1, 1),
+            preprolated_duration=abjad.ValueDuration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
                     nauert.TerminalQEvent(abjad.duration.offset(200)),
-                    abjad.duration.offset(0.9),
+                    abjad.duration.offset(9, 10),
                 )
             ],
         ),
@@ -72,11 +72,11 @@ def test_QGrid___eq___03():
             (1, 1),
             children=[
                 nauert.QGridLeaf(
-                    preprolated_duration=abjad.Duration(1, 1),
+                    preprolated_duration=abjad.ValueDuration(1, 1),
                     q_event_proxies=[
                         nauert.QEventProxy(
                             nauert.SilentQEvent(abjad.duration.offset(100)),
-                            abjad.duration.offset(0.5),
+                            abjad.duration.offset(1, 2),
                         )
                     ],
                 )
@@ -85,11 +85,11 @@ def test_QGrid___eq___03():
     )
     c = nauert.QGrid(
         next_downbeat=nauert.QGridLeaf(
-            preprolated_duration=abjad.Duration(1, 1),
+            preprolated_duration=abjad.ValueDuration(1, 1),
             q_event_proxies=[
                 nauert.QEventProxy(
                     nauert.TerminalQEvent(abjad.duration.offset(200)),
-                    abjad.duration.offset(0.9),
+                    abjad.duration.offset(9, 10),
                 )
             ],
         )
@@ -100,22 +100,22 @@ def test_QGrid___eq___03():
                 (1, 1),
                 children=[
                     nauert.QGridLeaf(
-                        preprolated_duration=abjad.Duration(1, 1),
+                        preprolated_duration=abjad.ValueDuration(1, 1),
                         q_event_proxies=[
                             nauert.QEventProxy(
                                 nauert.SilentQEvent(abjad.duration.offset(100)),
-                                abjad.duration.offset(0.5),
+                                abjad.duration.offset(1, 2),
                             )
                         ],
                     )
                 ],
             ),
             next_downbeat=nauert.QGridLeaf(
-                preprolated_duration=abjad.Duration(1, 1),
+                preprolated_duration=abjad.ValueDuration(1, 1),
                 q_event_proxies=[
                     nauert.QEventProxy(
                         nauert.TerminalQEvent(abjad.duration.offset(200)),
-                        abjad.duration.offset(0.9),
+                        abjad.duration.offset(9, 10),
                     )
                 ],
             ),
