@@ -5,7 +5,7 @@ import nauert
 
 def test_QEventProxy___init___01():
     q_event = nauert.PitchedQEvent(abjad.duration.offset(130), [0])
-    proxy = nauert.QEventProxy(q_event, abjad.duration.offset(0.5))
+    proxy = nauert.QEventProxy(q_event, abjad.duration.offset(1, 2))
     assert proxy.q_event == q_event
     assert proxy.offset() == abjad.duration.offset(1, 2)
 

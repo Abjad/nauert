@@ -283,11 +283,11 @@ class ConcatenatingGraceHandler(GraceHandler):
     def __init__(
         self,
         discard_grace_rest: bool = True,
-        grace_duration: abjad.Duration = abjad.Duration(1, 16),
+        grace_duration: abjad.ValueDuration = abjad.ValueDuration(1, 16),
         replace_rest_with_final_grace_note: bool = True,
     ) -> None:
         assert isinstance(discard_grace_rest, bool), repr(discard_grace_rest)
-        assert isinstance(grace_duration, abjad.Duration), repr(grace_duration)
+        assert isinstance(grace_duration, abjad.ValueDuration), repr(grace_duration)
         assert isinstance(replace_rest_with_final_grace_note, bool)
         self._discard_grace_rest = discard_grace_rest
         assert grace_duration.is_dyadic()
@@ -444,7 +444,7 @@ class ConcatenatingGraceHandler(GraceHandler):
         return self._discard_grace_rest
 
     @property
-    def grace_duration(self) -> abjad.Duration:
+    def grace_duration(self) -> abjad.ValueDuration:
         """
         Grace duration of concantenating grace handler.
         """

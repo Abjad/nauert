@@ -80,7 +80,7 @@ def test_Quantize_03():
     result = nauert.quantize(sequence, attack_point_optimizer=attack_point_optimizer)
 
     assert isinstance(result, abjad.Voice)
-    assert abjad.get.duration(result) == 2
+    assert abjad.get.duration(result) == abjad.ValueDuration(2)
 
     score = abjad.Score([abjad.Staff([result])])
 
@@ -520,7 +520,8 @@ def test_Quantize_11():
 def test_Quantize_12():
     definition = {"divisors": (2, 3, 5, 7), "max_depth": 2, "max_divisions": 2}
     search_tree = nauert.WeightedSearchTree(definition=definition)
-    durations = [457.14285, 814.1, 228.5714, 1440, 960]
+    fractions = [abjad.Fraction(_) for _ in [457.14285, 814.1, 228.5714, 1440, 960]]
+    durations = [abjad.ValueDuration(*_.as_integer_ratio()) for _ in fractions]
     pitches = range(len(durations))
     all_attachments = [(x,) for x in pitches]
     q_event_sequence = nauert.QEventSequence.from_millisecond_pitch_attachment_tuples(
@@ -756,7 +757,7 @@ def test_Quantize_16():
     attack_point_optimizer = nauert.MeasurewiseAttackPointOptimizer()
     q_schema = nauert.MeasurewiseQSchema(
         search_tree=search_tree,
-        tempo=abjad.MetronomeMark(abjad.Duration(1, 4), 72),
+        tempo=abjad.MetronomeMark(abjad.ValueDuration(1, 4), 72),
         time_signature=(7, 8),
         use_full_measure=True,
     )

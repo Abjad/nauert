@@ -70,15 +70,15 @@ class QSchema(abc.ABC):
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, duration: abjad.Duration) -> _qtargets.QTarget:
+    def __call__(self, duration: abjad.ValueDuration) -> _qtargets.QTarget:
         """
         Calls QSchema on ``duration``.
         """
-        assert isinstance(duration, abjad.Duration), repr(duration)
+        assert isinstance(duration, abjad.ValueDuration), repr(duration)
         target_items = []
         idx, current_offset = 0, abjad.Offset(abjad.Fraction(0))
-        duration = abjad.Duration(duration)
-        while current_offset.fraction < duration:
+        # while current_offset.fraction < duration:
+        while current_offset.duration() < duration:
             lookup = self[idx]
             lookup["offset_in_ms"] = current_offset
             target_item = self.target_item_class(**lookup)
@@ -187,9 +187,9 @@ class BeatwiseQSchema(QSchema):
         These settings can be applied as global defaults for the schema via keyword
         arguments, which persist until overridden:
 
-        >>> beatspan = abjad.Duration(5, 16)
+        >>> beatspan = abjad.ValueDuration(5, 16)
         >>> search_tree = nauert.UnweightedSearchTree({7: None})
-        >>> tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 54)
+        >>> tempo = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 54)
         >>> q_schema = nauert.BeatwiseQSchema(
         ...     beatspan=beatspan,
         ...     search_tree=search_tree,
@@ -205,17 +205,17 @@ class BeatwiseQSchema(QSchema):
         >>> for key, value in sorted(q_schema[index].items()):
         ...     print("{}:".format(key), value)
         ...
-        beatspan: 5/16
+        beatspan: ValueDuration(numerator=5, denominator=16)
         search_tree: UnweightedSearchTree(definition={7: None})
-        tempo: MetronomeMark(...)
+        tempo: MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=54, textual_indication=None, custom_markup=None, decimal=False)
 
         >>> index = 1000
         >>> for key, value in sorted(q_schema[index].items()):
         ...     print("{}:".format(key), value)
         ...
-        beatspan: 5/16
+        beatspan: ValueDuration(numerator=5, denominator=16)
         search_tree: UnweightedSearchTree(definition={7: None})
-        tempo: MetronomeMark(...)
+        tempo: MetronomeMark(reference_duration=ValueDuration(numerator=1, denominator=4), units_per_minute=54, textual_indication=None, custom_markup=None, decimal=False)
 
     ..  container:: example
 
@@ -226,23 +226,23 @@ class BeatwiseQSchema(QSchema):
         instantiate ``BeatwiseQSchemaItem`` instances, will apply those settings
         sequentially, starting from time-step ``0``:
 
-        >>> a = {"beatspan": abjad.Duration(5, 32)}
-        >>> b = {"beatspan": abjad.Duration(3, 16)}
-        >>> c = {"beatspan": abjad.Duration(1, 8)}
+        >>> a = {"beatspan": abjad.ValueDuration(5, 32)}
+        >>> b = {"beatspan": abjad.ValueDuration(3, 16)}
+        >>> c = {"beatspan": abjad.ValueDuration(1, 8)}
 
         >>> q_schema = nauert.BeatwiseQSchema(a, b, c)
 
         >>> q_schema[0]["beatspan"]
-        Duration(5, 32)
+        ValueDuration(numerator=5, denominator=32)
 
         >>> q_schema[1]["beatspan"]
-        Duration(3, 16)
+        ValueDuration(numerator=3, denominator=16)
 
         >>> q_schema[2]["beatspan"]
-        Duration(1, 8)
+        ValueDuration(numerator=1, denominator=8)
 
         >>> q_schema[3]["beatspan"]
-        Duration(1, 8)
+        ValueDuration(numerator=1, denominator=8)
 
     ..  container:: example
 
@@ -312,12 +312,13 @@ class BeatwiseQSchema(QSchema):
     ### INITIALIZER ###
 
     def __init__(self, *arguments, **keywords):
-        duration = abjad.Duration(1, 4)
-        self._beatspan = abjad.Duration(keywords.get("beatspan", duration))
+        duration = abjad.ValueDuration(1, 4)
+        # self._beatspan = abjad.ValueDuration(keywords.get("beatspan", duration))
+        self._beatspan = keywords.get("beatspan", duration)
         search_tree = keywords.get("search_tree", _searchtrees.UnweightedSearchTree())
         assert isinstance(search_tree, _searchtrees.SearchTree)
         self._search_tree = search_tree
-        tempo = keywords.get("tempo", (abjad.Duration(1, 4), 60))
+        tempo = keywords.get("tempo", (abjad.ValueDuration(1, 4), 60))
         if isinstance(tempo, tuple):
             tempo = abjad.MetronomeMark(*tempo)
         self._tempo = tempo
@@ -334,7 +335,7 @@ class BeatwiseQSchema(QSchema):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def beatspan(self) -> abjad.Duration:
+    def beatspan(self) -> abjad.ValueDuration:
         """
         Gets default beatspan of beatwise q-schema.
         """
@@ -397,7 +398,7 @@ class MeasurewiseQSchema(QSchema):
 
         >>> search_tree = nauert.UnweightedSearchTree({7: None})
         >>> time_signature = abjad.TimeSignature((3, 4))
-        >>> tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 54)
+        >>> tempo = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 54)
         >>> use_full_measure = True
         >>> q_schema = nauert.MeasurewiseQSchema(
         ...     search_tree=search_tree,
@@ -548,7 +549,7 @@ class MeasurewiseQSchema(QSchema):
         search_tree = keywords.get("search_tree", _searchtrees.UnweightedSearchTree())
         assert isinstance(search_tree, _searchtrees.SearchTree)
         self._search_tree = search_tree
-        tempo = keywords.get("tempo", (abjad.Duration(1, 4), 60))
+        tempo = keywords.get("tempo", (abjad.ValueDuration(1, 4), 60))
         if isinstance(tempo, tuple):
             tempo = abjad.MetronomeMark(*tempo)
         self._tempo = tempo

@@ -25,11 +25,11 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
 
     def __init__(
         self,
-        preprolated_duration: abjad.Duration = abjad.Duration(1),
+        preprolated_duration: abjad.ValueDuration = abjad.ValueDuration(1),
         q_event_proxies: typing.Sequence[_qeventproxy.QEventProxy] = (),
         is_divisible: bool = True,
     ) -> None:
-        assert isinstance(preprolated_duration, abjad.Duration), repr(
+        assert isinstance(preprolated_duration, abjad.ValueDuration), repr(
             preprolated_duration
         )
         assert q_event_proxies is not None, repr(q_event_proxies)
@@ -43,14 +43,14 @@ class QGridLeaf(abjad.rhythmtrees.RhythmTreeNode, uqbar.containers.UniqueTreeNod
     ### SPECIAL METHODS ###
 
     def __call__(
-        self, pulse_duration: abjad.Duration
+        self, pulse_duration: abjad.ValueDuration
     ) -> list[abjad.Note | abjad.Tuplet]:
         """
         Calls q-grid leaf.
         """
-        assert isinstance(pulse_duration, abjad.Duration), repr(pulse_duration)
+        assert isinstance(pulse_duration, abjad.ValueDuration), repr(pulse_duration)
         pitches = abjad.makers.make_pitches([0])
-        total_duration = abjad.Duration(abjad.Fraction(*self.pair()) * pulse_duration)
+        total_duration = abjad.Fraction(*self.pair()) * pulse_duration
         return abjad.makers.make_notes(pitches, [total_duration])
 
     def __graph__(self, **keywords: None) -> uqbar.graphs.Graph:
@@ -176,8 +176,8 @@ class QGrid:
         >>> q_grid = nauert.QGrid()
         >>> q_event_a = nauert.PitchedQEvent(abjad.duration.offset(250), [0])
         >>> q_event_b = nauert.PitchedQEvent(abjad.duration.offset(750), [1])
-        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(0.25))
-        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(0.75))
+        >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(1, 4))
+        >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(3, 4))
         >>> q_grid.fit_q_events([proxy_a, proxy_b])
 
         >>> for q_event_proxy in q_grid.root_node.q_event_proxies:
@@ -205,13 +205,13 @@ class QGrid:
         next_downbeat: QGridLeaf | None = None,
     ) -> None:
         if root_node is None:
-            root_node = QGridLeaf(abjad.Duration(1, 1))
+            root_node = QGridLeaf(abjad.ValueDuration(1, 1))
         assert isinstance(
             root_node,
             (QGridLeaf, QGridContainer),
         )
         if next_downbeat is None:
-            next_downbeat = QGridLeaf(abjad.Duration(1, 1))
+            next_downbeat = QGridLeaf(abjad.ValueDuration(1, 1))
         assert isinstance(next_downbeat, QGridLeaf)
         self._root_node = root_node
         self._next_downbeat = next_downbeat
@@ -220,11 +220,13 @@ class QGrid:
 
     ### SPECIAL METHODS ###
 
-    def __call__(self, beatspan: abjad.Duration) -> list[abjad.Leaf | abjad.Tuplet]:
+    def __call__(
+        self, beatspan: abjad.ValueDuration
+    ) -> list[abjad.Leaf | abjad.Tuplet]:
         """
         Calls q-grid.
         """
-        assert isinstance(beatspan, abjad.Duration), repr(beatspan)
+        assert isinstance(beatspan, abjad.ValueDuration), repr(beatspan)
         result = []
         components = self.root_node(beatspan)
         voice = abjad.Voice(components)
@@ -289,7 +291,7 @@ class QGrid:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def distance(self) -> abjad.Duration | None:
+    def distance(self) -> abjad.ValueDuration | None:
         r"""
         The computed total distance (divided by the number of ``QEventProxy``
         objects) of the offset of each ``QEventProxy`` contained by the
@@ -301,8 +303,8 @@ class QGrid:
             >>> q_grid = nauert.QGrid()
             >>> q_event_a = nauert.PitchedQEvent(abjad.duration.offset(250), [0], ["A"])
             >>> q_event_b = nauert.PitchedQEvent(abjad.duration.offset(750), [1], ["B"])
-            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(0.25))
-            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(0.75))
+            >>> proxy_a = nauert.QEventProxy(q_event_a, abjad.duration.offset(1, 4))
+            >>> proxy_b = nauert.QEventProxy(q_event_b, abjad.duration.offset(3, 4))
             >>> q_grid.fit_q_events([proxy_a, proxy_b])
             >>> print(q_grid.rtm_format())
             1
@@ -321,7 +323,7 @@ class QGrid:
             leaf's index: 1, leaf's offset: 1, q_event: ('B',)
 
             >>> q_grid.distance
-            Duration(1, 4)
+            ValueDuration(numerator=1, denominator=4)
 
             >>> q_events = q_grid.subdivide_leaves([(0, (1, 1))])
             >>> q_grid.fit_q_events(q_events)
@@ -344,18 +346,20 @@ class QGrid:
             leaf's index: 2, leaf's offset: 1/2, q_event: ('B',)
 
             >>> q_grid.distance
-            Duration(1, 8)
+            ValueDuration(numerator=1, denominator=8)
 
         """
         count = 0
-        absolute_distance = abjad.Duration(0)
+        absolute_distance = abjad.ValueDuration(0)
         for leaf, offset in zip(self.leaves, self.offsets, strict=True):
             for q_event_proxy in leaf.q_event_proxies:
                 absolute_distance += abs(q_event_proxy.offset() - offset)
                 count += 1
         if count:
-            fraction = absolute_distance / count
-            return abjad.Duration(fraction)
+            duration = absolute_distance / count
+            # return abjad.ValueDuration(fraction)
+            assert isinstance(duration, abjad.ValueDuration)
+            return duration
         return None
 
     @property
@@ -444,7 +448,7 @@ class QGrid:
                     [_leaf.q_event_proxies == [] for _leaf in leaves[1:]]
                 ):
                     new_leaf = QGridLeaf(
-                        preprolated_duration=abjad.Duration(*parent.pair()),
+                        preprolated_duration=abjad.ValueDuration(*parent.pair()),
                         q_event_proxies=leaves[0].q_event_proxies,
                     )
                     index = parent.parent.index(parent)
@@ -464,7 +468,7 @@ class QGrid:
     def subdivide_leaf(
         self,
         leaf: QGridLeaf,
-        subdivisions: typing.Sequence[abjad.Duration | int],
+        subdivisions: typing.Sequence[abjad.ValueDuration | int],
     ) -> list[_qeventproxy.QEventProxy]:
         """
         Replaces the QGridLeaf ``leaf`` contained in a QGrid by a
@@ -474,19 +478,19 @@ class QGrid:
         Returns list of QEventProxies attached to ``leaf``.
         """
         children = []
+        durations = []
         for subdivision in subdivisions:
             if isinstance(subdivision, int):
-                subdivision = abjad.Duration(subdivision)
+                subdivision = abjad.ValueDuration(subdivision)
                 child = QGridLeaf(preprolated_duration=subdivision)
                 children.append(child)
+                durations.append(subdivision)
             else:
-                assert isinstance(subdivision, abjad.Duration), repr(subdivision)
+                assert isinstance(subdivision, abjad.ValueDuration), repr(subdivision)
+                durations.append(subdivision)
         container = QGridContainer(
             leaf.pair(),
-            children=[
-                QGridLeaf(preprolated_duration=abjad.Duration(subdivision))
-                for subdivision in subdivisions
-            ],
+            children=[QGridLeaf(preprolated_duration=_) for _ in durations],
         )
         if leaf.parent is not None:
             index = leaf.parent.index(leaf)

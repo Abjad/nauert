@@ -119,17 +119,17 @@ class QEventSequence:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def duration_in_ms(self) -> abjad.Duration:
+    def duration_in_ms(self) -> abjad.ValueDuration:
         r"""
         Get duration ``QEventSequence`` in milliseconds:
 
         >>> durations = (1000, -500, 1250, -500, 750)
         >>> sequence = nauert.QEventSequence.from_millisecond_durations(durations)
         >>> sequence.duration_in_ms
-        Duration(4000, 1)
+        ValueDuration(numerator=4000, denominator=1)
 
         """
-        return abjad.Duration(self[-1].offset().fraction)
+        return abjad.ValueDuration(*self[-1].offset().fraction.as_integer_ratio())
 
     @property
     def sequence(self) -> tuple:
@@ -251,7 +251,6 @@ class QEventSequence:
         assert isinstance(tuples, collections.abc.Iterable)
         assert all(isinstance(_, collections.abc.Iterable) for _ in tuples)
         assert all(len(_) == 3 for _ in tuples)
-        assert all(0 < duration for duration, _, _ in tuples)
         pitch_prototype = (numbers.Number, type(None), collections.abc.Sequence)
         for _, pitches, attachments in tuples:
             if attachments is None:
@@ -272,8 +271,13 @@ class QEventSequence:
                 duration = sum(_[0] for _ in group)
                 groups.append((duration, None, ()))
         # find offsets
-        offsets = abjad.math.cumulative_sums([abs(_[0]) for _ in groups])
-        durations = [abjad.Duration(_) for _ in offsets]
+        offsets = abjad.math.cumulative_sums(
+            [abs(_[0]) for _ in groups],
+            start=abjad.ValueDuration(0),
+        )
+        # durations = [abjad.ValueDuration(_) for _ in offsets]
+        assert all(isinstance(_, abjad.ValueDuration) for _ in offsets), repr(offsets)
+        durations = offsets[:]
         offsets = [abjad.Offset(_.as_fraction()) for _ in durations]
         # build QEvents
         q_events = [
@@ -310,7 +314,6 @@ class QEventSequence:
         assert isinstance(pairs, collections.abc.Iterable)
         assert all(isinstance(_, collections.abc.Iterable) for _ in pairs)
         assert all(len(_) == 2 for _ in pairs)
-        assert all(0 < duration for duration, _ in pairs)
         pitch_prototype = (numbers.Number, type(None), collections.abc.Sequence)
         for _, pitches in pairs:
             assert isinstance(pitches, pitch_prototype)
@@ -324,7 +327,7 @@ class QEventSequence:
     @classmethod
     def from_tempo_scaled_durations(
         class_,
-        durations: typing.Sequence[abjad.Duration],
+        durations: typing.Sequence[abjad.ValueDuration],
         tempo: abjad.MetronomeMark,
     ) -> "QEventSequence":
         r"""
@@ -332,9 +335,9 @@ class QEventSequence:
 
         ..  container:: example
 
-            >>> tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 174)
+            >>> tempo = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 174)
             >>> pairs = [(1, 4), (-3, 16), (1, 16), (-1, 2)]
-            >>> durations = abjad.duration.durations(pairs)
+            >>> durations = abjad.duration.value_durations(pairs)
             >>> method = nauert.QEventSequence.from_tempo_scaled_durations
             >>> sequence = method(durations, tempo=tempo)
             >>> for q_event in sequence:
@@ -347,19 +350,24 @@ class QEventSequence:
             TerminalQEvent(...)
 
         """
-        assert all(isinstance(_, abjad.Duration) for _ in durations), repr(durations)
+        assert all(isinstance(_, abjad.ValueDuration) for _ in durations), repr(
+            durations
+        )
         assert isinstance(tempo, abjad.MetronomeMark)
         durations = [x for x in abjad.sequence.sum_by_sign(durations, sign=[-1]) if x]
         durations = [tempo.duration_to_milliseconds(_) for _ in durations]
-        offsets = abjad.math.cumulative_sums([abs(_) for _ in durations])
-        offsets = [abjad.duration.offset(_) for _ in offsets]
+        offsets = abjad.math.cumulative_sums(
+            [abs(_) for _ in durations],
+            start=abjad.ValueDuration(0),
+        )
+        offsets = [abjad.duration.offset(*_.as_integer_ratio()) for _ in offsets]
         q_events = []
         for offset, duration in zip(offsets, durations):
             offset = abjad.Offset(offset.fraction)
-            assert isinstance(duration, abjad.Duration)
+            assert isinstance(duration, abjad.ValueDuration)
             q_event: _qevents.QEvent
             # negative duration indicates silence
-            if duration < 0:
+            if duration < abjad.ValueDuration(0):
                 q_event = _qevents.SilentQEvent(offset)
             # otherwise use middle C
             else:
@@ -375,7 +383,7 @@ class QEventSequence:
         Changes ``leaves``, optionally with ``tempo`` into a ``QEventSequence``:
 
         >>> staff = abjad.Staff("c'4 <d' fs'>8. r16 gqs'2")
-        >>> tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 72)
+        >>> tempo = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 72)
         >>> sequence = nauert.QEventSequence.from_tempo_scaled_leaves(staff[:], tempo)
         >>> for q_event in sequence:
         ...     q_event

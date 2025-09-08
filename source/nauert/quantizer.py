@@ -80,11 +80,11 @@ def quantize(
 
         >>> measurewise_q_schema = nauert.MeasurewiseQSchema(
         ...     {
-        ...         "tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 78),
+        ...         "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 78),
         ...         "time_signature": abjad.TimeSignature((2, 4)),
         ...     },
         ...     {
-        ...         "tempo": abjad.MetronomeMark(abjad.Duration(1, 8), 57),
+        ...         "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 8), 57),
         ...         "time_signature": abjad.TimeSignature((5, 4)),
         ...     },
         ... )
@@ -175,9 +175,9 @@ def quantize(
 
         >>> beatwise_q_schema = nauert.BeatwiseQSchema(
         ... {
-        ...     2: {"tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 120)},
-        ...     5: {"tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 90)},
-        ...     7: {"tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 30)},
+        ...     2: {"tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 120)},
+        ...     5: {"tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 90)},
+        ...     7: {"tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 30)},
         ... })
 
         >>> result = nauert.quantize(
