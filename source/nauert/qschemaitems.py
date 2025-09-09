@@ -66,7 +66,7 @@ class BeatwiseQSchemaItem(QSchemaItem):
 
         Defines a change in tempo:
 
-        >>> metronome_mark = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 60)
+        >>> metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 60)
         >>> nauert.BeatwiseQSchemaItem(tempo=metronome_mark)
         BeatwiseQSchemaItem(...)
 
@@ -74,8 +74,8 @@ class BeatwiseQSchemaItem(QSchemaItem):
 
         Defines a change in beatspan:
 
-        >>> nauert.BeatwiseQSchemaItem(beatspan=abjad.ValueDuration(1, 8))
-        BeatwiseQSchemaItem(beatspan=ValueDuration(numerator=1, denominator=8), search_tree=None, tempo=None)
+        >>> nauert.BeatwiseQSchemaItem(beatspan=abjad.Duration(1, 8))
+        BeatwiseQSchemaItem(beatspan=Duration(numerator=1, denominator=8), search_tree=None, tempo=None)
 
     """
 
@@ -87,15 +87,15 @@ class BeatwiseQSchemaItem(QSchemaItem):
 
     def __init__(
         self,
-        beatspan: abjad.ValueDuration | None = None,
+        beatspan: abjad.Duration | None = None,
         search_tree: _searchtrees.SearchTree | None = None,
         tempo: abjad.MetronomeMark | None = None,
     ) -> None:
         if beatspan is not None:
-            assert isinstance(beatspan, abjad.ValueDuration), repr(beatspan)
+            assert isinstance(beatspan, abjad.Duration), repr(beatspan)
         QSchemaItem.__init__(self, search_tree=search_tree, tempo=tempo)
         if beatspan is not None:
-            assert abjad.ValueDuration(0) < beatspan
+            assert abjad.Duration(0) < beatspan
         self._beatspan = beatspan
 
     def __repr__(self) -> str:
@@ -109,7 +109,7 @@ class BeatwiseQSchemaItem(QSchemaItem):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def beatspan(self) -> typing.Optional[abjad.ValueDuration]:
+    def beatspan(self) -> typing.Optional[abjad.Duration]:
         """
         The optionally defined beatspan duration.
         """
@@ -128,7 +128,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
 
         Defines a change in tempo:
 
-        >>> metronome_mark = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 60)
+        >>> metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 60)
         >>> mark = nauert.MeasurewiseQSchemaItem(tempo=metronome_mark).tempo
         >>> abjad.lilypond(mark)
         '\\tempo 4=60'
@@ -147,7 +147,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
 
         >>> time_signature = abjad.TimeSignature((6, 8))
         >>> nauert.MeasurewiseQSchemaItem(time_signature=time_signature).beatspan
-        ValueDuration(numerator=1, denominator=8)
+        Duration(numerator=1, denominator=8)
 
     """
 
@@ -191,7 +191,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def beatspan(self) -> typing.Optional[abjad.ValueDuration]:
+    def beatspan(self) -> typing.Optional[abjad.Duration]:
         """
         The beatspan duration, if a time signature was defined.
         """
@@ -199,7 +199,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
             if self.use_full_measure:
                 return self.time_signature.duration()
             else:
-                return abjad.ValueDuration(1, self.time_signature.denominator)
+                return abjad.Duration(1, self.time_signature.denominator)
         return None
 
     @property

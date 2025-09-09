@@ -34,7 +34,7 @@ def test_QGrid___call___01():
         abjad.duration.offset(1),
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g])
-    result = q_grid(abjad.ValueDuration(1, 4))
+    result = q_grid(abjad.Duration(1, 4))
     assert len(result) == 1
     assert repr(result[0]) == """Note("c'4")"""
 
@@ -81,7 +81,7 @@ def test_QGrid___call___02():
         abjad.duration.offset(1),
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g])
-    result = q_grid(abjad.ValueDuration(1, 4))
+    result = q_grid(abjad.Duration(1, 4))
     assert isinstance(result, list) and len(result) == 1
     assert abjad.lilypond(result[0]) == abjad.string.normalize(
         r"""
@@ -157,7 +157,7 @@ def test_QGrid___call___03():
         abjad.duration.offset(1),
     )
     q_grid.fit_q_events([a, b, c, d, e, f, g])
-    result = q_grid(abjad.ValueDuration(1, 3))
+    result = q_grid(abjad.Duration(1, 3))
     abjad.makers.tweak_tuplet_bracket_edge_height(result)
     assert isinstance(result, list) and len(result) == 1
     assert abjad.lilypond(result[0]) == abjad.string.normalize(

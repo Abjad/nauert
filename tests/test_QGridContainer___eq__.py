@@ -13,11 +13,11 @@ def test_QGridContainer___eq___01():
 def test_QGridContainer___eq___02():
     a = nauert.QGridContainer(
         (1, 1),
-        children=[nauert.QGridLeaf(preprolated_duration=abjad.ValueDuration(1, 1))],
+        children=[nauert.QGridLeaf(preprolated_duration=abjad.Duration(1, 1))],
     )
     b = nauert.QGridContainer(
         (1, 1),
-        children=[nauert.QGridLeaf(preprolated_duration=abjad.ValueDuration(1, 1))],
+        children=[nauert.QGridLeaf(preprolated_duration=abjad.Duration(1, 1))],
     )
     assert format(a) == format(b)
     assert a != b
@@ -28,15 +28,15 @@ def test_QGridContainer___eq___03():
     b = nauert.QGridContainer((2, 1), children=[])
     c = nauert.QGridContainer(
         (1, 1),
-        children=[nauert.QGridLeaf(preprolated_duration=abjad.ValueDuration(1, 1))],
+        children=[nauert.QGridLeaf(preprolated_duration=abjad.Duration(1, 1))],
     )
     d = nauert.QGridContainer(
         (2, 1),
-        children=[nauert.QGridLeaf(preprolated_duration=abjad.ValueDuration(1, 1))],
+        children=[nauert.QGridLeaf(preprolated_duration=abjad.Duration(1, 1))],
     )
     e = nauert.QGridContainer(
         (2, 1),
-        children=[nauert.QGridLeaf(abjad.ValueDuration(2))],
+        children=[nauert.QGridLeaf(abjad.Duration(2))],
     )
     assert a != b
     assert a != c

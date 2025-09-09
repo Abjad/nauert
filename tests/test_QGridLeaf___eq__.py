@@ -4,22 +4,22 @@ import nauert
 
 
 def test_QGridLeaf___eq___01():
-    a = nauert.QGridLeaf(abjad.ValueDuration(1), [])
-    b = nauert.QGridLeaf(abjad.ValueDuration(1), [])
+    a = nauert.QGridLeaf(abjad.Duration(1), [])
+    b = nauert.QGridLeaf(abjad.Duration(1), [])
     assert format(a) == format(b)
     assert a != b
 
 
 def test_QGridLeaf___eq___02():
-    a = nauert.QGridLeaf(abjad.ValueDuration(1), [])
+    a = nauert.QGridLeaf(abjad.Duration(1), [])
     sqe = nauert.SilentQEvent(abjad.duration.offset(1000))
     b = nauert.QGridLeaf(
-        abjad.ValueDuration(1),
+        abjad.Duration(1),
         [nauert.QEventProxy(sqe, abjad.duration.offset(1, 2))],
     )
-    c = nauert.QGridLeaf(abjad.ValueDuration(2), [])
+    c = nauert.QGridLeaf(abjad.Duration(2), [])
     d = nauert.QGridLeaf(
-        abjad.ValueDuration(2),
+        abjad.Duration(2),
         [nauert.QEventProxy(sqe, abjad.duration.offset(1, 2))],
     )
     assert a != b
