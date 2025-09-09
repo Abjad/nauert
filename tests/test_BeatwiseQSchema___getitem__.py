@@ -10,9 +10,9 @@ def test_BeatwiseQSchema___getitem___01():
         == schema[1]
         == schema[2]
         == {
-            "beatspan": abjad.ValueDuration(1, 4),
+            "beatspan": abjad.Duration(1, 4),
             "search_tree": nauert.UnweightedSearchTree(),
-            "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 60),
+            "tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 60),
         }
     )
 
@@ -21,34 +21,34 @@ def test_BeatwiseQSchema___getitem___02():
     item_a = nauert.BeatwiseQSchemaItem(
         search_tree=nauert.UnweightedSearchTree({2: None})
     )
-    metronome_mark = abjad.MetronomeMark(abjad.ValueDuration(1, 4), 76)
+    metronome_mark = abjad.MetronomeMark(abjad.Duration(1, 4), 76)
     item_b = nauert.BeatwiseQSchemaItem(tempo=metronome_mark)
     item_c = nauert.BeatwiseQSchemaItem(
-        beatspan=abjad.ValueDuration(1, 8),
+        beatspan=abjad.Duration(1, 8),
         search_tree=nauert.UnweightedSearchTree({5: None}),
     )
     schema = nauert.BeatwiseQSchema(
         {2: item_a, 4: item_b, 7: item_c},
-        beatspan=abjad.ValueDuration(1, 32),
+        beatspan=abjad.Duration(1, 32),
         search_tree=nauert.UnweightedSearchTree({3: None}),
-        tempo=abjad.MetronomeMark(abjad.ValueDuration(1, 16), 36),
+        tempo=abjad.MetronomeMark(abjad.Duration(1, 16), 36),
     )
     assert (
         schema[0]
         == schema[1]
         == {
-            "beatspan": abjad.ValueDuration(1, 32),
+            "beatspan": abjad.Duration(1, 32),
             "search_tree": nauert.UnweightedSearchTree({3: None}),
-            "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 16), 36),
+            "tempo": abjad.MetronomeMark(abjad.Duration(1, 16), 36),
         }
     )
     assert (
         schema[2]
         == schema[3]
         == {
-            "beatspan": abjad.ValueDuration(1, 32),
+            "beatspan": abjad.Duration(1, 32),
             "search_tree": nauert.UnweightedSearchTree({2: None}),
-            "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 16), 36),
+            "tempo": abjad.MetronomeMark(abjad.Duration(1, 16), 36),
         }
     )
     assert (
@@ -56,9 +56,9 @@ def test_BeatwiseQSchema___getitem___02():
         == schema[5]
         == schema[6]
         == {
-            "beatspan": abjad.ValueDuration(1, 32),
+            "beatspan": abjad.Duration(1, 32),
             "search_tree": nauert.UnweightedSearchTree({2: None}),
-            "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 76),
+            "tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 76),
         }
     )
     assert (
@@ -66,8 +66,8 @@ def test_BeatwiseQSchema___getitem___02():
         == schema[8]
         == schema[1000]
         == {
-            "beatspan": abjad.ValueDuration(1, 8),
+            "beatspan": abjad.Duration(1, 8),
             "search_tree": nauert.UnweightedSearchTree({5: None}),
-            "tempo": abjad.MetronomeMark(abjad.ValueDuration(1, 4), 76),
+            "tempo": abjad.MetronomeMark(abjad.Duration(1, 4), 76),
         }
     )

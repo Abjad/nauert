@@ -20,7 +20,7 @@ def test_DistanceHeuristic___call___01():
     q_target_beats = heuristic((q_target_beat,))
     q_target_beat = q_target_beats[0]
     q_grid = q_target_beat.q_grid
-    assert q_grid.distance == abjad.ValueDuration(0)
+    assert q_grid.distance == abjad.Duration(0)
     rtm = q_grid.rtm_format()
     assert rtm == "(1 ((1 (1 1)) (1 (1 1))))"
 
@@ -42,6 +42,6 @@ def test_DistanceHeuristic___call___02():
     q_target_beats = heuristic((q_target_beat,))
     q_target_beat = q_target_beats[0]
     q_grid = q_target_beat.q_grid
-    assert q_grid.distance == abjad.ValueDuration(1, 15)
+    assert q_grid.distance == abjad.Duration(1, 15)
     rtm = q_grid.rtm_format()
     assert rtm == "(1 (1 1 1 1 1))"
