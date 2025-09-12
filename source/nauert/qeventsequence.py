@@ -337,7 +337,7 @@ class QEventSequence:
 
             >>> tempo = abjad.MetronomeMark(abjad.Duration(1, 4), 174)
             >>> pairs = [(1, 4), (-3, 16), (1, 16), (-1, 2)]
-            >>> durations = abjad.duration.value_durations(pairs)
+            >>> durations = abjad.duration.durations(pairs)
             >>> method = nauert.QEventSequence.from_tempo_scaled_durations
             >>> sequence = method(durations, tempo=tempo)
             >>> for q_event in sequence:
