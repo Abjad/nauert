@@ -359,7 +359,7 @@ class QEventSequence:
             start=abjad.Duration(0),
         )
         offsets = [abjad.duration.offset(*_.as_integer_ratio()) for _ in offsets]
-        q_events = []
+        q_events: list[_qevents.QEvent] = []
         for offset, duration in zip(offsets, durations):
             offset = abjad.Offset(offset.fraction)
             assert isinstance(duration, abjad.Duration)
