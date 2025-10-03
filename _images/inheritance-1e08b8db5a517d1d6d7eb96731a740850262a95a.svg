@@ -1,0 +1,163 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="534pt" height="243pt" viewBox="0.00 0.00 534.00 243.00">
+<ns0:g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 239)">
+<ns0:title>InheritanceGraph</ns0:title>
+<ns0:g id="clust1" class="cluster">
+<ns0:title>cluster_abjad.rhythmtrees</ns0:title>
+<ns0:path fill="none" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M275,-147C275,-147 411.5,-147 411.5,-147 417.5,-147 423.5,-153 423.5,-159 423.5,-159 423.5,-215 423.5,-215 423.5,-221 417.5,-227 411.5,-227 411.5,-227 275,-227 275,-227 269,-227 263,-221 263,-215 263,-215 263,-159 263,-159 263,-153 269,-147 275,-147" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="343.25" y="-213.5" font-family="Arial" font-size="10.00">abjad.rhythmtrees</ns0:text>
+</ns0:g>
+<ns0:g id="clust2" class="cluster">
+<ns0:title>cluster_builtins</ns0:title>
+<ns0:path fill="none" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M20,-71C20,-71 54.25,-71 54.25,-71 60.25,-71 66.25,-77 66.25,-83 66.25,-83 66.25,-115 66.25,-115 66.25,-121 60.25,-127 54.25,-127 54.25,-127 20,-127 20,-127 14,-127 8,-121 8,-115 8,-115 8,-83 8,-83 8,-77 14,-71 20,-71" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="37.12" y="-113.5" font-family="Arial" font-size="10.00">builtins</ns0:text>
+</ns0:g>
+<ns0:g id="clust3" class="cluster">
+<ns0:title>cluster_nauert.qgrid</ns0:title>
+<ns0:path fill="none" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M455.5,-24C455.5,-24 505.5,-24 505.5,-24 511.5,-24 517.5,-30 517.5,-36 517.5,-36 517.5,-168 517.5,-168 517.5,-174 511.5,-180 505.5,-180 505.5,-180 455.5,-180 455.5,-180 449.5,-180 443.5,-174 443.5,-168 443.5,-168 443.5,-36 443.5,-36 443.5,-30 449.5,-24 455.5,-24" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-166.5" font-family="Arial" font-size="10.00">nauert.qgrid</ns0:text>
+</ns0:g>
+<ns0:g id="clust4" class="cluster">
+<ns0:title>cluster_uqbar.containers.unique_tree</ns0:title>
+<ns0:path fill="none" stroke="#bcd2ee" stroke-width="2" stroke-dasharray="5,2" d="M98.25,-59C98.25,-59 315.62,-59 315.62,-59 321.62,-59 327.62,-65 327.62,-71 327.62,-71 327.62,-127 327.62,-127 327.62,-133 321.62,-139 315.62,-139 315.62,-139 98.25,-139 98.25,-139 92.25,-139 86.25,-133 86.25,-127 86.25,-127 86.25,-71 86.25,-71 86.25,-65 92.25,-59 98.25,-59" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="206.94" y="-125.5" font-family="Arial" font-size="10.00">uqbar.containers.unique_tree</ns0:text>
+</ns0:g>
+
+<ns0:g id="edge4" class="edge">
+<ns0:title>abjad.rhythmtrees.RhythmTreeContainer-&gt;nauert.qgrid.QGridContainer</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M404.57,-154.01C415.04,-140.69 429.15,-124.03 443.5,-111 443.88,-110.65 444.27,-110.31 444.66,-109.97" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="446.56,-112.93 452.14,-103.92 442.16,-107.49 446.56,-112.93" />
+</ns0:g>
+
+<ns0:g id="edge1" class="edge">
+<ns0:title>abjad.rhythmtrees.RhythmTreeNode-&gt;abjad.rhythmtrees.RhythmTreeContainer</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M322.3,-177C329.49,-177 337.52,-177 345.38,-177" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="345.13,-180.5 355.13,-177 345.13,-173.5 345.13,-180.5" />
+</ns0:g>
+
+<ns0:g id="edge5" class="edge">
+<ns0:title>abjad.rhythmtrees.RhythmTreeNode-&gt;nauert.qgrid.QGridLeaf</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M322.05,-192.7C348.31,-207.18 390.45,-224.16 423.5,-208 442.82,-198.55 457.4,-178.86 466.84,-162.46" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="469.66,-164.59 471.32,-154.12 463.5,-161.27 469.66,-164.59" />
+</ns0:g>
+
+<ns0:g id="edge6" class="edge">
+<ns0:title>builtins.object-&gt;abjad.rhythmtrees.RhythmTreeNode</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M44.43,-99.71C52.45,-112.28 67.54,-132.73 86.25,-143 140.89,-173 214.84,-178.17 258.54,-178.25" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="258.55,-181.75 268.52,-178.16 258.49,-174.75 258.55,-181.75" />
+</ns0:g>
+
+<ns0:g id="edge7" class="edge">
+<ns0:title>builtins.object-&gt;nauert.qgrid.QGrid</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M49.18,-78.21C74.49,-54.71 139.49,-1 205,-1 517.5,0 517.5,0 297.25,-1 351.24,-1 412.09,-18.34 448.04,-30.47" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="446.77,-33.73 457.36,-33.7 449.06,-27.12 446.77,-33.73" />
+</ns0:g>
+
+<ns0:g id="edge8" class="edge">
+<ns0:title>builtins.object-&gt;uqbar.containers.unique_tree.UniqueTreeNode</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M59.16,-89C66.16,-89 74.15,-89 81.9,-89" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="81.8,-92.5 91.8,-89 81.8,-85.5 81.8,-92.5" />
+</ns0:g>
+
+<ns0:g id="edge2" class="edge">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeContainer-&gt;uqbar.containers.unique_tree.UniqueTreeList</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M235.9,-89C243.73,-89 252.3,-89 260.42,-89" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="260.36,-92.5 270.36,-89 260.36,-85.5 260.36,-92.5" />
+</ns0:g>
+
+<ns0:g id="edge9" class="edge">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeList-&gt;abjad.rhythmtrees.RhythmTreeContainer</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M319.98,-111.66C330.5,-122.15 343.16,-134.78 354.54,-146.12" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="351.92,-148.46 361.47,-153.04 356.86,-143.5 351.92,-148.46" />
+</ns0:g>
+
+<ns0:g id="edge10" class="edge">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeNode-&gt;nauert.qgrid.QGridLeaf</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M141.98,-73.23C152.25,-67.2 164.75,-61.05 177,-58 241.96,-41.82 262.56,-42.27 327.62,-58 373.18,-69.01 420.4,-96.18 449.85,-115.34" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="447.6,-118.05 457.87,-120.66 451.47,-112.22 447.6,-118.05" />
+</ns0:g>
+
+<ns0:g id="edge3" class="edge">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeNode-&gt;uqbar.containers.unique_tree.UniqueTreeContainer</ns0:title>
+<ns0:path fill="none" stroke="lightslategrey" d="M141.77,-89C148.89,-89 156.94,-89 164.85,-89" />
+<ns0:polygon fill="lightslategrey" stroke="lightslategrey" points="164.71,-92.5 174.71,-89 164.71,-85.5 164.71,-92.5" />
+</ns0:g>
+
+<ns0:g id="node1" class="node">
+<ns0:title>abjad.rhythmtrees.RhythmTreeContainer</ns0:title>
+<ns0:path fill="#fbb4ae" stroke="#fbb4ae" stroke-width="2" d="M403.5,-199C403.5,-199 369.5,-199 369.5,-199 363.5,-199 357.5,-193 357.5,-187 357.5,-187 357.5,-167 357.5,-167 357.5,-161 363.5,-155 369.5,-155 369.5,-155 403.5,-155 403.5,-155 409.5,-155 415.5,-161 415.5,-167 415.5,-167 415.5,-187 415.5,-187 415.5,-193 409.5,-199 403.5,-199" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="386.5" y="-185.5" font-family="Arial" font-size="10.00">Rhythm</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="386.5" y="-173.5" font-family="Arial" font-size="10.00">Tree</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="386.5" y="-161.5" font-family="Arial" font-size="10.00">Container</ns0:text>
+</ns0:g>
+
+<ns0:g id="node2" class="node">
+<ns0:title>abjad.rhythmtrees.RhythmTreeNode</ns0:title>
+<ns0:path fill="#fbb4ae" stroke="#fbb4ae" stroke-width="2" d="M309.5,-199C309.5,-199 283,-199 283,-199 277,-199 271,-193 271,-187 271,-187 271,-167 271,-167 271,-161 277,-155 283,-155 283,-155 309.5,-155 309.5,-155 315.5,-155 321.5,-161 321.5,-167 321.5,-167 321.5,-187 321.5,-187 321.5,-193 315.5,-199 309.5,-199" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-185.5" font-family="Arial" font-size="10.00">Rhythm</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-173.5" font-family="Arial" font-size="10.00">Tree</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-161.5" font-family="Arial" font-size="10.00">Node</ns0:text>
+</ns0:g>
+
+<ns0:g id="node3" class="node">
+<ns0:title>builtins.object</ns0:title>
+<ns0:g id="a_node3"><ns0:a ns1:href="https://docs.python.org/3/library/functions.html#object" ns1:title="object" target="_top">
+<ns0:path fill="#b3cde3" stroke="#b3cde3" stroke-width="2" d="M51.58,-99C51.58,-99 22.67,-99 22.67,-99 19.33,-99 16,-95.67 16,-92.33 16,-92.33 16,-85.67 16,-85.67 16,-82.33 19.33,-79 22.67,-79 22.67,-79 51.58,-79 51.58,-79 54.92,-79 58.25,-82.33 58.25,-85.67 58.25,-85.67 58.25,-92.33 58.25,-92.33 58.25,-95.67 54.92,-99 51.58,-99" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="37.12" y="-85.5" font-family="Arial" font-size="10.00">object</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node4" class="node">
+<ns0:title>nauert.qgrid.QGrid</ns0:title>
+<ns0:g id="a_node4"><ns0:a ns1:href="../api/api/nauert/qgrid.html#nauert.qgrid.QGrid" ns1:title="QGrid" target="_top">
+<ns0:path fill="black" stroke="black" stroke-width="2" d="M494.58,-52C494.58,-52 466.42,-52 466.42,-52 463.08,-52 459.75,-48.67 459.75,-45.33 459.75,-45.33 459.75,-38.67 459.75,-38.67 459.75,-35.33 463.08,-32 466.42,-32 466.42,-32 494.58,-32 494.58,-32 497.92,-32 501.25,-35.33 501.25,-38.67 501.25,-38.67 501.25,-45.33 501.25,-45.33 501.25,-48.67 497.92,-52 494.58,-52" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-38.5" font-family="Arial" font-size="10.00" fill="white">QGrid</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node5" class="node">
+<ns0:title>nauert.qgrid.QGridContainer</ns0:title>
+<ns0:g id="a_node5"><ns0:a ns1:href="../api/api/nauert/qgrid.html#nauert.qgrid.QGridContainer" ns1:title="QGrid\nContainer" target="_top">
+<ns0:path fill="black" stroke="black" stroke-width="2" d="M498.83,-102C498.83,-102 462.17,-102 462.17,-102 456.83,-102 451.5,-96.67 451.5,-91.33 451.5,-91.33 451.5,-80.67 451.5,-80.67 451.5,-75.33 456.83,-70 462.17,-70 462.17,-70 498.83,-70 498.83,-70 504.17,-70 509.5,-75.33 509.5,-80.67 509.5,-80.67 509.5,-91.33 509.5,-91.33 509.5,-96.67 504.17,-102 498.83,-102" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-88.5" font-family="Arial" font-size="10.00" fill="white">QGrid</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-76.5" font-family="Arial" font-size="10.00" fill="white">Container</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node6" class="node">
+<ns0:title>nauert.qgrid.QGridLeaf</ns0:title>
+<ns0:g id="a_node6"><ns0:a ns1:href="../api/api/nauert/qgrid.html#nauert.qgrid.QGridLeaf" ns1:title="QGrid\nLeaf" target="_top">
+<ns0:path fill="black" stroke="black" stroke-width="2" d="M490.58,-152C490.58,-152 470.42,-152 470.42,-152 465.08,-152 459.75,-146.67 459.75,-141.33 459.75,-141.33 459.75,-130.67 459.75,-130.67 459.75,-125.33 465.08,-120 470.42,-120 470.42,-120 490.58,-120 490.58,-120 495.92,-120 501.25,-125.33 501.25,-130.67 501.25,-130.67 501.25,-141.33 501.25,-141.33 501.25,-146.67 495.92,-152 490.58,-152" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-138.5" font-family="Arial" font-size="10.00" fill="white">QGrid</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="480.5" y="-126.5" font-family="Arial" font-size="10.00" fill="white">Leaf</ns0:text>
+</ns0:a>
+</ns0:g>
+</ns0:g>
+
+<ns0:g id="node7" class="node">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeContainer</ns0:title>
+<ns0:path fill="#decbe4" stroke="#decbe4" stroke-width="2" d="M223,-111C223,-111 189,-111 189,-111 183,-111 177,-105 177,-99 177,-99 177,-79 177,-79 177,-73 183,-67 189,-67 189,-67 223,-67 223,-67 229,-67 235,-73 235,-79 235,-79 235,-99 235,-99 235,-105 229,-111 223,-111" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="206" y="-97.5" font-family="Arial" font-size="10.00">Unique</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="206" y="-85.5" font-family="Arial" font-size="10.00">Tree</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="206" y="-73.5" font-family="Arial" font-size="10.00">Container</ns0:text>
+</ns0:g>
+
+<ns0:g id="node8" class="node">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeList</ns0:title>
+<ns0:path fill="#decbe4" stroke="#decbe4" stroke-width="2" d="M307.62,-111C307.62,-111 284.88,-111 284.88,-111 278.88,-111 272.88,-105 272.88,-99 272.88,-99 272.88,-79 272.88,-79 272.88,-73 278.88,-67 284.88,-67 284.88,-67 307.62,-67 307.62,-67 313.62,-67 319.62,-73 319.62,-79 319.62,-79 319.62,-99 319.62,-99 319.62,-105 313.62,-111 307.62,-111" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-97.5" font-family="Arial" font-size="10.00">Unique</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-85.5" font-family="Arial" font-size="10.00">Tree</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="296.25" y="-73.5" font-family="Arial" font-size="10.00">List</ns0:text>
+</ns0:g>
+
+<ns0:g id="node9" class="node">
+<ns0:title>uqbar.containers.unique_tree.UniqueTreeNode</ns0:title>
+<ns0:path fill="#decbe4" stroke="#decbe4" stroke-width="2" d="M129,-111C129,-111 106.25,-111 106.25,-111 100.25,-111 94.25,-105 94.25,-99 94.25,-99 94.25,-79 94.25,-79 94.25,-73 100.25,-67 106.25,-67 106.25,-67 129,-67 129,-67 135,-67 141,-73 141,-79 141,-79 141,-99 141,-99 141,-105 135,-111 129,-111" />
+<ns0:text xml:space="preserve" text-anchor="middle" x="117.62" y="-97.5" font-family="Arial" font-size="10.00">Unique</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="117.62" y="-85.5" font-family="Arial" font-size="10.00">Tree</ns0:text>
+<ns0:text xml:space="preserve" text-anchor="middle" x="117.62" y="-73.5" font-family="Arial" font-size="10.00">Node</ns0:text>
+</ns0:g>
+</ns0:g>
+</ns0:svg>
