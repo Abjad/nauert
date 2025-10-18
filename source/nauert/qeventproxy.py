@@ -1,5 +1,3 @@
-import typing
-
 import abjad
 
 from . import qevents as _qevents
@@ -88,7 +86,7 @@ class QEventProxy:
     ### PUBLIC PROPERTIES ###
 
     @property
-    def index(self) -> typing.Optional[int]:
+    def index(self) -> int | None:
         """
         Gets index of q-event proxy.
         """
@@ -102,7 +100,7 @@ class QEventProxy:
         return self._offset
 
     @property
-    def q_event(self) -> typing.Optional[_qevents.QEvent]:
+    def q_event(self) -> _qevents.QEvent | None:
         """
         Gets q-event of q-event proxy.
         """

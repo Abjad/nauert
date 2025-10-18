@@ -1,5 +1,4 @@
 import abc
-import typing
 
 import abjad
 
@@ -36,14 +35,14 @@ class QSchemaItem(abc.ABC):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def search_tree(self) -> typing.Optional[_searchtrees.SearchTree]:
+    def search_tree(self) -> _searchtrees.SearchTree | None:
         """
         The optionally defined search tree.
         """
         return self._search_tree
 
     @property
-    def tempo(self) -> typing.Optional[abjad.MetronomeMark]:
+    def tempo(self) -> abjad.MetronomeMark | None:
         """
         The optionally defined tempo.
         """
@@ -109,7 +108,7 @@ class BeatwiseQSchemaItem(QSchemaItem):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def beatspan(self) -> typing.Optional[abjad.Duration]:
+    def beatspan(self) -> abjad.Duration | None:
         """
         The optionally defined beatspan duration.
         """
@@ -191,7 +190,7 @@ class MeasurewiseQSchemaItem(QSchemaItem):
     ### PUBLIC PROPERTIES ###
 
     @property
-    def beatspan(self) -> typing.Optional[abjad.Duration]:
+    def beatspan(self) -> abjad.Duration | None:
         """
         The beatspan duration, if a time signature was defined.
         """
@@ -203,14 +202,14 @@ class MeasurewiseQSchemaItem(QSchemaItem):
         return None
 
     @property
-    def time_signature(self) -> typing.Optional[abjad.TimeSignature]:
+    def time_signature(self) -> abjad.TimeSignature | None:
         """
         The optionally defined time signature.
         """
         return self._time_signature
 
     @property
-    def use_full_measure(self) -> typing.Optional[bool]:
+    def use_full_measure(self) -> bool | None:
         """
         If true, use the full measure as the beatspan.
         """

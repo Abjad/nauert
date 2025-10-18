@@ -1,5 +1,4 @@
 import abc
-import typing
 
 import abjad
 
@@ -89,9 +88,7 @@ class QTargetBeat(QTargetItem):
 
     ### SPECIAL METHODS ###
 
-    def __call__(
-        self, job_id: int
-    ) -> typing.Optional[_quantizationjob.QuantizationJob]:
+    def __call__(self, job_id: int) -> _quantizationjob.QuantizationJob | None:
         """
         Calls q-target beat.
         """
@@ -200,7 +197,7 @@ class QTargetBeat(QTargetItem):
         return self._q_events
 
     @property
-    def q_grid(self) -> typing.Optional[_qgrid.QGrid]:
+    def q_grid(self) -> _qgrid.QGrid | None:
         """
         The ``QGrid`` instance selected by a ``Heuristic``.
 

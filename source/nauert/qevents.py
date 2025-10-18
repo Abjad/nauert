@@ -67,7 +67,7 @@ class QEvent(abc.ABC):
         return self._attachments
 
     @property
-    def index(self) -> typing.Optional[int]:
+    def index(self) -> int | None:
         """
         The optional index, for sorting QEvents with identical offsets.
         """
